@@ -8,8 +8,5 @@
         "generateStaticRoutes": true
       }
     }
-  ],
-  "rewrites": [
-    { "source": "/:match*", "destination": "/blog/:match*" }
   ]
 }
