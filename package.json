@@ -14,7 +14,6 @@
     "@nuxt/content": "^1.14.0",
     "core-js": "^3.9.1",
     "frontmatter-markdown-loader": "^3.6.2",
-    "milligram": "^1.4.1",
     "nuxt": "^2.15.3",
     "prism-themes": "^1.6.0"
   },
