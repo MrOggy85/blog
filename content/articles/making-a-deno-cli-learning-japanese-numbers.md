@@ -4,7 +4,7 @@ description: 'I have been following the evolution of Deno since I first heard ab
 slug: /blog/making-a-deno-cli-learning-japanese-numbers
 short: How to build a SEO optimized, static file blog with nuxtjs and markdown files. Including a sitemap.xml and catagory or tag pages.
 date: 27/07/2020
-img: ../japanese_numbers_deno.jpg
+img: japanese_numbers_deno.jpg
 tags:
   - code
   - nuxt
