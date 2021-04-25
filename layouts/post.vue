@@ -27,15 +27,10 @@
 
 .post-wrapper img {
   width: 100%;
-  /* margin-bottom: 20px; */
+  height: 100%;
   margin: 0 auto;
   display: block;
 }
-/* .hej {
-  margin-left: auto;
-    margin-right: auto;
-    display: block;
-} */
 
 .post-wrapper blockquote {
   margin: 0 0 1.5em;
@@ -57,10 +52,6 @@
 }
 
 .post-wrapper {
-  /* margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center; */
   padding: 15px;
 }
 

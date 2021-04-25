@@ -5,6 +5,9 @@ slug: /blog/private-npm-registry-with-verdaccio-2-2
 short: How to build a SEO optimized, static file blog with nuxtjs and markdown files. Including a sitemap.xml and catagory or tag pages.
 date: 14/01/2019
 img: mi_scusi.png
+alt: 'Italian from Euro Trip'
+width: 500
+height: 274
 tags:
   - code
   - nuxt

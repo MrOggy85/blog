@@ -2,7 +2,12 @@
   <article>
     <h1>{{ article.title }}</h1>
     <p>{{ article.description }}</p>
-    <img :src="article.img" :alt="article.alt" />
+    <img
+      :src="article.img"
+      :alt="article.alt"
+      :width="article.width"
+      :height="article.height"
+    />
     <nuxt-content :document="article" />
   </article>
 </template>

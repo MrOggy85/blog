@@ -5,6 +5,9 @@ slug: /blog/where-does-docker-names-come-from
 short: How to build a SEO optimized, static file blog with nuxtjs and markdown files. Including a sitemap.xml and catagory or tag pages.
 date: 04/10/2019
 img: docker_funny.jpg
+alt: 'Various animals working in a fictional Docker port'
+width: 990
+height: 556
 tags:
   - code
   - nuxt

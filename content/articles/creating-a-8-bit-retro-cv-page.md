@@ -5,6 +5,9 @@ slug: /blog/creating-a-8-bit-retro-cv-page
 short: How to build a SEO optimized, static file blog with nuxtjs and markdown files. Including a sitemap.xml and catagory or tag pages.
 date: 30/12/2018
 img: oskarlindgren_homepage.png
+alt: 'Homepage Screenshot'
+width: 984
+height: 691
 tags:
   - code
   - nuxt
@@ -78,7 +81,13 @@ The next row will be a list of icons with links to the services I want the visit
 
 The result:
 
-<img src="cv_homepage_card.png" style="width: 70%;" />
+<img
+  src="cv_homepage_card.png"
+  alt="CV Homepage Card"
+  width="598"
+  height="233"
+  style="width: 70%;"
+/>
 <figcaption>NES style!!!</figcaption>
 
 Okay so that very informative and pretty cool. But, it's not very engaging. I needed some kind of visually stunning effect in the same spirit. I needed a side scrolling background!
@@ -127,7 +136,12 @@ The `width` is 3 times the image width size and the `translate3d` property tells
 
 The end result:
 
-<img src="oskarlindgren_website.gif" alt="website preview" />
+<img
+  src="oskarlindgren_website.gif"
+  alt="website preview"
+  width="1030"
+  height="696"
+/>
 <figcaption>Scrolling like a beauty</figcaption>
 
 View the full source at [Github](https://github.com/MrOggy85/homepage).
