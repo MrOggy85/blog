@@ -1,10 +1,10 @@
 ---
 title: Self-hosting - running your own services
 description: 'Recently I have been on a journey to get rid of my dependency on service providers like Google, Dropbox, Microsoft and others.'
-slug: /self-hosting-running-your-own-services
+slug: /blog/self-hosting-running-your-own-services
 short: How to build a SEO optimized, static file blog with nuxtjs and markdown files. Including a sitemap.xml and catagory or tag pages.
 date: 31/12/2020
-img: self-hosting-running-your-own-services/pexels-brett-sayles-2881229.jpg
+img: ../self-hosting-running-your-own-services/pexels-brett-sayles-2881229.jpg
 tags:
   - code
   - nuxt
@@ -23,7 +23,7 @@ To host your own services is a really good learning opportunity for server manag
 
 ## How does my server structure look like?
 
-<img src="self-hosting-running-your-own-services/portainer_digitalocean_docker.png" alt="Docker logo" style="width: 70%" />
+<img src="../self-hosting-running-your-own-services/portainer_digitalocean_docker.png" alt="Docker logo" style="width: 70%" />
 
 I have two small virtual servers (1 CPU, 1GB RAM each) on [Digital Ocean](https://www.digitalocean.com/) which costs me 15$/month. And I run all my services with [Docker](https://www.docker.com/) to make most use of each server. Docker also simplifies maintenance drastically since nothing has to be directly installed on the server. And I use [Caddy](https://caddyserver.com/) as a reverse proxy for easy HTTPS/SSL support and super easy configuration compared to nginx. This is how my Caddyfile looks like:
 
@@ -89,7 +89,7 @@ Update: I decided to use a static site generator instead of Ghost. Ghost is well
 
 ## ~Homepage~ - *Caddy*
 
-<img src="oskarlindgren_homepage.png" alt="homepage" style="width: 70%;" />
+<img src="../oskarlindgren_homepage.png" alt="homepage" style="width: 70%;" />
 <figcaption>www.oskarlindgren.se</figcaption>
 
 My homepage is just a HTML file and a CSS file. I tried to keep it light, which makes it eligible for the [250kb club](https://250kb.club/). Using Caddy to serve these static files with TLS/SSL support makes it super easy to make changes through sFTP.

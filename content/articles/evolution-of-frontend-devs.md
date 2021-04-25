@@ -1,10 +1,10 @@
 ---
 title: Evolution of Frontend Devs
 description: "Today the frontend scene is very broad and consist of a range of skills. That means if your main skills are creating a good design with CSS, it doesn't necessarily mean you also can configure webpack to handle Sass files."
-slug: /evolution-of-frontend-devs
+slug: /blog/evolution-of-frontend-devs
 short: How to build a SEO optimized, static file blog with nuxtjs and markdown files. Including a sitemap.xml and catagory or tag pages.
 date: 01/04/2019
-img: evolution-of-frontend-devs/harvey.jpg
+img: ../evolution-of-frontend-devs/harvey.jpg
 tags:
   - code
   - nuxt
@@ -18,7 +18,7 @@ Disclaimer:<br />
 This is a gross simplification of the history of the web and data has been cherry picked to fit my narrative. There is probably some facts not mentioned or wrongly described that effects some of my points and I am open to feedback to adjust my views.
 
 ## First Gen - World Wide Web Dev
-<img src="evolution-of-frontend-devs/9407011_31-A5-at-72-dpi.jpg" style="width: 70%" />
+<img src="../evolution-of-frontend-devs/9407011_31-A5-at-72-dpi.jpg" style="width: 70%" />
 <figcaption>source: [Cern](https://cds.cern.ch/record/39437#31)</figcaption>
 
 The information Highway was born at CERN by Tim Beerners-Lee and [released to the public in 1991](https://en.wikipedia.org/wiki/World_Wide_Web). At this point every website was just static webpages directly served from the web servers. Each URL pointed to a specific directory which had an index.html where you also could point to other sources like css files, images, etc. Updating the website meant changing the html file, uploading a new version by ftp and then the users got the new content. After some time the need for a more dynamic experience led to the introduction of [Javascript in 1995 by Brendan Eich](https://en.wikipedia.org/wiki/JavaScript#History) and during the same year [cookies](https://en.wikipedia.org/wiki/HTTP_cookie#History) were introduced by the same state of the art browser at the time: Netscape.
@@ -26,7 +26,7 @@ The information Highway was born at CERN by Tim Beerners-Lee and [released to th
 At this point frontend development was not really a known term. Programmers were able to create html files that could be interpreted by a browser to show a document. It was mainly used in research and websites where very informative and non interactive.
 
 ## Second Gen - Web 2.0
-<img src="evolution-of-frontend-devs/gilfoyle.jpg" style="width: 70%" alt="Gilfoyle from Silicon Valley TV Show" />
+<img src="../evolution-of-frontend-devs/gilfoyle.jpg" style="width: 70%" alt="Gilfoyle from Silicon Valley TV Show" />
 <figcaption>source: <a href="https://www.techrepublic.com/pictures/our-21-favorite-fictional-techies-from-tv-and-movies/">techrepublic.com</a></figcaption>
 
 > *"I tried to make it slow. I really did. But I'm not Dinesh. It's very difficult for me to do shitty work." - Gilfoyle*
@@ -35,17 +35,17 @@ The need for more an even more dynamic experience led [Rasmus Lerdorf to, in 199
 
 But the most important interesting part of this time was that a lot of people could set up their own website easily thanks to services like e.g. Angelfire, Geocities, AOL, etc. I think that, the idea that frontend is easy and unimportant was born during this era. The second half of the 90s can be summarized by these gifs that frequently was shown on peoples websites:
 
-<img src="evolution-of-frontend-devs/HoHollywoodPicture3800construction.gif" alt="Under Contruction GIF" />
-<img src="evolution-of-frontend-devs/ajaj0077lines_bulletsconstruction.gif" alt="Under Contruction GIF" />
-<img src="evolution-of-frontend-devs/AtAthens6321underconstruction_lemmings.gif" alt="Under Contruction GIF" />
+<img src="../evolution-of-frontend-devs/HoHollywoodPicture3800construction.gif" alt="Under Contruction GIF" />
+<img src="../evolution-of-frontend-devs/ajaj0077lines_bulletsconstruction.gif" alt="Under Contruction GIF" />
+<img src="../evolution-of-frontend-devs/AtAthens6321underconstruction_lemmings.gif" alt="Under Contruction GIF" />
 <figcaption>source: http://textfiles.com/underconstruction/</figcaption>
 
-<img src="evolution-of-frontend-devs/firebar.gif" alt="Firebar GIF" />
+<img src="../evolution-of-frontend-devs/firebar.gif" alt="Firebar GIF" />
 <figcaption>source: <a href="https://web.archive.org/web/20090807121959/http://geocities.com/curt_sigurdsen/ALBUM01.htm)">Internet Archive of Curt Sigurdsen's Geocities Webpage</a></figcaption>
 
 This technology would however enable the environment where internet based business could start to form. And it also led to a specialization between frontend and backend. The frontend developers was mainly focusing on the design of the page through html and css with a small portion of Javascript to enable some dynamic features. And the backend developers would focus on the business logic of the site.
 
-<img src="evolution-of-frontend-devs/bubble_burst.jpg" alt="WWW bubble burst" style="width:70%;" />
+<img src="../evolution-of-frontend-devs/bubble_burst.jpg" alt="WWW bubble burst" style="width:70%;" />
 <figcaption>source: <a href="https://betanews.com/wp-content/uploads/2014/10/bubble_burst.jpg">betanews.com</a></figcaption>
 
 The web gained a lot of traction during the second half of the 90s and got a crazy hype which led to the dot-com bubble which [bursted in 2000](https://en.wikipedia.org/wiki/Dot-com_bubble#Bursting_of_the_bubble). But, the web was not dead. The technology was still great but the expectations had to be realigned closer to the reality of what promises the technology and developers could offer.
@@ -54,7 +54,7 @@ During the first decade of 2000 the web became even more dynamic and the term we
 
 Now frontend development became more complex. A lot of business logic that was previously handled by the server was moved to client side to enable user interaction without the need of a page reload with the use of Ajax calls. There was also a ton of third party integrations that bloated the global scope and the css files grew into biblical proportions. And there were still a lot of differences between browsers which led to [jQuery being born in 2006 by John Resig](https://en.wikipedia.org/wiki/JQuery#History).
 
-<img src="evolution-of-frontend-devs/spaghetti.jpeg" alt="man with spaghetti" style="width:70%;" />
+<img src="../evolution-of-frontend-devs/spaghetti.jpeg" alt="man with spaghetti" style="width:70%;" />
 <figcaption>sauce: <a href="https://medium.com/@orsararecipes/garlic-shrimp-with-linguine-recipe-160a2ab633ac">Pasquale Sciarappa</a></figcaption>
 
 > *Leave the gun – take the cannoli. - Clemenza*
@@ -63,7 +63,7 @@ By around 2010 web development was a mess, imho. The server and client code was 
 
 ## Third Gen - Javascript Dev
 
-<img src="evolution-of-frontend-devs/optimize.jpeg" alt="hipster boy with mac" style="width:70%;" />
+<img src="../evolution-of-frontend-devs/optimize.jpeg" alt="hipster boy with mac" style="width:70%;" />
 <figcaption>source: <a href="https://www.wwdjapan.com/24925">WWD Japan, Photo by Kuba Dabrowski</a></figcaption>
 
 > *"...which made frontend development into it's own domain."*
@@ -85,7 +85,7 @@ This is what I identify as the biggest migration wave in programming history. No
 
 ## (predicted) Forth Gen - Typescript Dev
 
-<img src="evolution-of-frontend-devs/harvey.jpg" alt="Harvey from Suits TV Show" style="width:70%;" />
+<img src="../evolution-of-frontend-devs/harvey.jpg" alt="Harvey from Suits TV Show" style="width:70%;" />
 <figcaption>source: <a href="https://dave.uktv.co.uk/suits/article/dave-calls-harvey-qa/">UKTV</a></figcaption>
 
 There where several attempts to radically improve Javascript with a superset language such as [CoffeeScript, introduced in 2010 by Jeremy Ashkenas](https://en.wikipedia.org/wiki/CoffeeScript), followed by [Dart in 2011](https://en.wikipedia.org/wiki/Dart_(programming_language)#History) and [Elm in 2012](https://en.wikipedia.org/wiki/Elm_(programming_language)#History). These languages were popular, but never gained any mainstream traction.

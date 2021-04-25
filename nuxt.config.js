@@ -24,7 +24,7 @@ export default {
       },
       {
         rel: 'stylesheet',
-        href: '/style.css',
+        href: '/blog/style.css',
       },
     ],
   },
@@ -64,7 +64,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    extend(config, ctx) {
+    extend(config, _ctx) {
       // ... other code ...
       // add frontmatter-markdown-loader
       config.module.rules.push({

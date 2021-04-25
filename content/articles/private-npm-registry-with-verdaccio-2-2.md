@@ -1,10 +1,10 @@
 ---
 title: Setup a Private NPM Registry with Verdaccio and Docker
 description: "When collaborating on frontend application writing component libraries our companies doesn't always want to share that code with the community (boo!). Using package managers like npm and yarn is really powerful to handle our third party code. When working locally it's easy to use npm link or yarn link for ease of development. Then when we want to use our library with our application we need to provide a repo link with a tag and auth token (ugly and unsafe!). Let's do it proper by publishing our library to our own NPM registry instead! And also get an additional cache layer in case NPM is down..."
-slug: /private-npm-registry-with-verdaccio-2-2
+slug: /blog/private-npm-registry-with-verdaccio-2-2
 short: How to build a SEO optimized, static file blog with nuxtjs and markdown files. Including a sitemap.xml and catagory or tag pages.
 date: 14/01/2019
-img: mi_scusi.png
+img: ../mi_scusi.png
 tags:
   - code
   - nuxt
