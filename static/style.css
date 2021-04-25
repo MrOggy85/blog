@@ -18,7 +18,7 @@ html {
 
 body {
   background: #191d21;
-  color: hsla(0,0%,100%,.75);
+  color: #dad8d8;
   font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   font-size: 1.6em;
   font-weight: 300;
@@ -27,9 +27,9 @@ body {
 }
 
 a {
-  color: #4261ff;
+  color: #90a2ff;
   text-decoration: none;
 }
 a:visited {
-  color: #a24bfb;
+  color: #c68fff;
 }

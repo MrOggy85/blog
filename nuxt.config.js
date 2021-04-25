@@ -6,21 +6,26 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'blog',
+    title: "Oskar Lindgren's Blog",
     htmlAttrs: {
       lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Oskar Lindgren Tech Blog FullStack Dev',
+      },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/blog/favicon.ico' },
       {
-        rel: 'stylesheet',
+        rel: 'preload',
+        as: 'font',
         href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic',
+          'https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic&display=swap',
       },
       {
         rel: 'stylesheet',
