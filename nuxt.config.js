@@ -53,6 +53,10 @@ export default {
     '@nuxt/content',
   ],
 
+  render: {
+    injectScripts: false,
+  },
+
   // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {
     markdown: {
