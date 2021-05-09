@@ -51,6 +51,10 @@ export default {
     injectScripts: false,
   },
 
+  router: {
+    base: '/blog/',
+  },
+
   // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {
     markdown: {
