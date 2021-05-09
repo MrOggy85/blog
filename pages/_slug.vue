@@ -1,6 +1,7 @@
 <template>
-  <article>
+  <article class="blog-post">
     <h1>{{ article.title }}</h1>
+    <p class="date">{{ article.date }}</p>
     <p>{{ article.description }}</p>
     <img
       :src="article.img"
@@ -22,3 +23,12 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.blog-post h1 {
+  margin: 0;
+}
+.date {
+  margin-top: 0;
+}
+</style>

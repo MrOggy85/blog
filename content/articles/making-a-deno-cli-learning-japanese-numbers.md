@@ -1,7 +1,7 @@
 ---
 title: Making a Deno CLI - Learning Japanese Numbers
 description: 'I have been following the evolution of Deno since I first heard about it. I really like node.js and I was playing around with it when it since it was released. '
-slug: /blog/making-a-deno-cli-learning-japanese-numbers
+slug: making-a-deno-cli-learning-japanese-numbers
 short: How to build a SEO optimized, static file blog with nuxtjs and markdown files. Including a sitemap.xml and catagory or tag pages.
 date: 27/07/2020
 img: japanese_numbers_deno.jpg

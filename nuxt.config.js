@@ -20,16 +20,10 @@ export default {
       },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/blog/favicon.ico' },
-      {
-        rel: 'preload',
-        as: 'font',
-        href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic&display=swap',
-      },
+      { rel: 'icon', type: 'image/x-icon', href: 'favicon.ico' },
       {
         rel: 'stylesheet',
-        href: '/blog/style.css',
+        href: 'style.css',
       },
     ],
   },

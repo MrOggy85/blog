@@ -1,7 +1,7 @@
 ---
 title: Evolution of Frontend Devs
 description: "Today the frontend scene is very broad and consist of a range of skills. That means if your main skills are creating a good design with CSS, it doesn't necessarily mean you also can configure webpack to handle Sass files."
-slug: /blog/evolution-of-frontend-devs
+slug: evolution-of-frontend-devs
 short: How to build a SEO optimized, static file blog with nuxtjs and markdown files. Including a sitemap.xml and catagory or tag pages.
 date: 01/04/2019
 img: evolution-of-frontend-devs/harvey.jpg

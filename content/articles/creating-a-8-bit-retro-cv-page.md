@@ -1,7 +1,7 @@
 ---
 title: Creating a 8 bit Retro CV Page
 description: 'I grow up playing SNES (スーパーファミコン) and Sega Mega Drive (メガドライブ). My love for pixel graphic games are absolute. Therefore it made sense for me to build a website in that style to represent me as the geek I was growing up and the person that I still am.'
-slug: /blog/creating-a-8-bit-retro-cv-page
+slug: creating-a-8-bit-retro-cv-page
 short: How to build a SEO optimized, static file blog with nuxtjs and markdown files. Including a sitemap.xml and catagory or tag pages.
 date: 30/12/2018
 img: oskarlindgren_homepage.png

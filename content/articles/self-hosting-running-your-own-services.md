@@ -1,7 +1,7 @@
 ---
 title: Self-hosting - running your own services
 description: 'Recently I have been on a journey to get rid of my dependency on service providers like Google, Dropbox, Microsoft and others.'
-slug: /blog/self-hosting-running-your-own-services
+slug: self-hosting-running-your-own-services
 short: How to build a SEO optimized, static file blog with nuxtjs and markdown files. Including a sitemap.xml and catagory or tag pages.
 date: 31/12/2020
 img: self-hosting-running-your-own-services/pexels-brett-sayles-2881229.jpg
