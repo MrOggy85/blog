@@ -10,15 +10,19 @@
 </template>
 
 <script>
+import { DateTime } from 'luxon';
+
 export default {
   async asyncData() {
     const resolve = await require.context('~/content/articles/', true, /\.md$/)
-    const imports = resolve.keys().map((key) => resolve(key))
-    // sort by date
-    // imports.sort((a, b) =>
-    //   moment(b.attributes.date, 'DD/MM/YYYY').diff(moment(a.attributes.date, 'DD/MM/YYYY'))
-    // )
-    return { posts: imports }
+    const posts = resolve
+      .keys()
+      .map((key) => resolve(key))
+      .sort((a, b) => {
+        return DateTime.fromFormat(b.attributes.date, 'dd/mm/yyyy').diff(DateTime.fromFormat(a.attributes.date, 'dd/mm/yyyy'))
+      });
+
+    return { posts }
   },
 }
 </script>
@@ -29,7 +33,6 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   text-align: center;
 }
