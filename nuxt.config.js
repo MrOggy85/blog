@@ -52,7 +52,7 @@ export default {
   },
 
   router: {
-    base: '',
+    base: '/blog',
   },
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
