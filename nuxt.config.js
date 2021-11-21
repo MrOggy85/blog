@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'path';
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -52,7 +52,7 @@ export default {
   },
 
   router: {
-    base: '/blog/',
+    base: '',
   },
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
@@ -73,7 +73,7 @@ export default {
         test: /\.md$/,
         include: path.resolve(__dirname, 'content'),
         loader: 'frontmatter-markdown-loader',
-      })
+      });
     },
   },
-}
+};
