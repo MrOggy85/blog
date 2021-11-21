@@ -10,6 +10,10 @@ module.exports = {
     'plugin:nuxt/recommended',
   ],
   plugins: [],
-  // add your custom rules here
-  rules: {},
-}
+  rules: {
+    'prettier/prettier': [
+      'error',
+      { singleQuote: true, parser: 'flow', semi: true },
+    ],
+  },
+};

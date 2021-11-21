@@ -3,6 +3,9 @@
     <div class="inner">
       <Nuxt />
     </div>
+    <footer>
+      <a href="http://localhost:3000/blog/feed/articles/rss.xml" style="display:flex;"><img src="rss-icon.png" alt="rss" width="20" height="20" /> <p>RSS</p></a>
+    </footer>
   </div>
 </template>
 
@@ -30,6 +33,23 @@
   height: 100%;
   margin: 0 auto;
   display: block;
+}
+
+.post-wrapper footer img {
+  width: 20px;
+  height: 20px;
+}
+
+
+.post-wrapper footer p {
+  margin-top: 0;
+  font-size: 18px;
+  overflow: hidden;
+  line-height: 1em;
+  max-height: 2em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .post-wrapper blockquote {

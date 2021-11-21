@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxt/content": "^1.14.0",
+    "@nuxtjs/feed": "^2.0.0",
     "core-js": "^3.9.1",
     "frontmatter-markdown-loader": "^3.6.2",
     "luxon": "^1.27.0",
