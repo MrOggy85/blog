@@ -1,4 +1,43 @@
 import path from 'path';
+import fs from 'fs';
+
+let posts = [];
+
+const constructFeedItem = async (post, dir, hostname) => {
+  // note the path used here, we are using a dummy page with an empty layout in order to not send that data along with our other content
+  const filePath = path.join(__dirname, `dist/${post.slug}/index.html`);
+  const content = await fs.promises.readFile(filePath, 'utf8');
+  const url = `${hostname}/${dir}/${post.slug}`;
+  return {
+    title: post.title,
+    id: url,
+    link: url,
+    description: post.description,
+    content,
+  };
+};
+
+const create = async (feed, args) => {
+  const [filePath, ext] = args;
+  const hostname =
+    process.NODE_ENV === 'production'
+      ? 'https://oskarlindgren.se/blog'
+      : 'http://localhost:3000/blog';
+  feed.options = {
+    title: 'My Blog',
+    description: /Blog Stuff!/,
+    link: `${hostname}/feed.${ext}`,
+  };
+  const { $content } = require('@nuxt/content');
+  if (posts === null || posts.length === 0) {
+    posts = await $content('articles').fetch();
+  }
+  for (const post of posts) {
+    const feedItem = await constructFeedItem(post, filePath, hostname);
+    feed.addItem(feedItem);
+  }
+  return feed;
+};
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -25,6 +64,12 @@ export default {
         rel: 'stylesheet',
         href: 'style.css',
       },
+      {
+        rel: 'alternate',
+        type: 'application/rss+xml',
+        title: 'Oskar Lindgren Tech Blog FullStack Dev',
+        href: 'https://www.oskarlindgren.se/blog/feed.xml',
+      },
     ],
   },
 
@@ -48,44 +93,15 @@ export default {
     '@nuxtjs/feed',
   ],
 
-  feed() {
-    const baseUrlArticles = 'https://oskarlindgren.se/blog';
-    const baseLinkFeedArticles = '/feed/articles';
-    const feedFormats = {
-      rss: { type: 'rss2', file: 'rss.xml' },
-      json: { type: 'json1', file: 'feed.json' },
-    };
-    const { $content } = require('@nuxt/content');
-
-    const createFeedArticles = async function (feed) {
-      feed.options = {
-        title: 'My Blog',
-        description: 'I write about technology',
-        link: baseUrlArticles,
-      };
-      const articles = await $content('articles').fetch();
-
-      articles.forEach((article) => {
-        const url = `${baseUrlArticles}/${article.slug}`;
-
-        feed.addItem({
-          title: article.title,
-          id: url,
-          link: url,
-          date: article.published,
-          description: article.summary,
-          content: article.summary,
-          author: article.authors,
-        });
-      });
-    };
-
-    return Object.values(feedFormats).map(({ file, type }) => ({
-      path: `${baseLinkFeedArticles}/${file}`,
-      type,
-      create: createFeedArticles,
-    }));
-  },
+  feed: [
+    {
+      path: '/feed.xml',
+      create,
+      cacheTime: 1000 * 60 * 15,
+      type: 'rss2',
+      data: ['blog', 'xml'],
+    },
+  ],
 
   render: {
     injectScripts: false,

@@ -4,7 +4,10 @@
       <Nuxt />
     </div>
     <footer>
-      <a href="http://localhost:3000/blog/feed/articles/rss.xml" style="display:flex;"><img src="rss-icon.png" alt="rss" width="20" height="20" /> <p>RSS</p></a>
+      <a href="/blog/feed.xml" style="display: flex"
+        ><img src="rss-icon.png" alt="rss" width="20" height="20" />
+        <p>RSS</p></a
+      >
     </footer>
   </div>
 </template>
@@ -39,7 +42,6 @@
   width: 20px;
   height: 20px;
 }
-
 
 .post-wrapper footer p {
   margin-top: 0;
