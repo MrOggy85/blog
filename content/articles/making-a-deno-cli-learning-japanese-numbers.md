@@ -102,6 +102,6 @@ Now we can add use this function to let the computer speak the number and the us
 // C(") (")   (")_(")   (")-(")o
 ```
 
-See the full source here.
+See the full source [here](https://github.com/MrOggy85/japanese-numbers).
 
 Happy coding!
