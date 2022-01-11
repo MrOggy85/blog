@@ -1,14 +1,13 @@
 ---
 title: The Web3 that we don't need
-description: 'tl;dr
-It seems to me like a perfect storm of tech, greed and smart people.'
+description: 'It seems to me like a perfect storm of tech, greed and smart people.'
 slug: the-web3-we-dont-need
 short: How to build a SEO optimized, static file blog with nuxtjs and markdown files. Including a sitemap.xml and catagory or tag pages.
 date: 12/01/2022
 img: the-web3-we-dont-need/clark-van-der-beken-mcCAFvlzZFQ-unsplash.jpeg
-alt: 'Homepage Screenshot'
-width: 984
-height: 691
+alt: 'Texture with negative space'
+width: 1920
+height: 1249
 tags:
   - web3
   - crypto

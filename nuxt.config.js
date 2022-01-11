@@ -4,8 +4,16 @@ import fs from 'fs';
 let posts = [];
 
 const constructFeedItem = async (post, dir, hostname) => {
+  const distFolder = path.join(__dirname, `dist`);
+  const r = await fs.promises.readdir(distFolder);
+  console.log('dist folder:', r.join('\n'));
   // note the path used here, we are using a dummy page with an empty layout in order to not send that data along with our other content
   const filePath = path.join(__dirname, `dist/${post.slug}/index.html`);
+  const exists = fs.existsSync(filePath);
+  if (!exists) {
+    return null;
+  }
+
   const content = await fs.promises.readFile(filePath, 'utf8');
   const url = `${hostname}/${dir}/${post.slug}`;
   return {
@@ -34,7 +42,9 @@ const create = async (feed, args) => {
   }
   for (const post of posts) {
     const feedItem = await constructFeedItem(post, filePath, hostname);
-    feed.addItem(feedItem);
+    if (feedItem) {
+      feed.addItem(feedItem);
+    }
   }
   return feed;
 };
