@@ -6,7 +6,7 @@ console.log("BASE_URL", BASE_URL);
 
 const CSS_PLACEHOLDER = "/* %CSS% */";
 const BODY_PLACEHOLDER = "%body%";
-const BASE_URL_PLACEHOLDER = "%base_url%";
+// const BASE_URL_PLACEHOLDER = "%base_url%";
 
 async function getHtml(body: string) {
   const path = `./index.html`;
@@ -16,8 +16,8 @@ async function getHtml(body: string) {
 
   return html
     .replace(CSS_PLACEHOLDER, CSS)
-    .replace(BODY_PLACEHOLDER, body)
-    .replaceAll(BASE_URL_PLACEHOLDER, BASE_URL);
+    .replace(BODY_PLACEHOLDER, body);
+  // .replaceAll(BASE_URL_PLACEHOLDER, BASE_URL);
 }
 
 function getTitleMarkdown(ctx: Context) {
@@ -29,13 +29,13 @@ function getTitleMarkdown(ctx: Context) {
 }
 
 async function getAll(ctx: Context) {
-  const baseUrl = `${BASE_URL}`;
+  // const baseUrl = `${BASE_URL}`;
 
-  const hej: { markdown: string; date: Date }[] = [];
+  const hej: { markdown: string; date: Date; }[] = [];
   for await (const dirEntry of Deno.readDir("./markdown")) {
     const content = await getContent(dirEntry.name);
     const markdown = `
-## [${content.title}](${baseUrl}${content.slug})
+## [${content.title}](${content.slug})
 
 ${content.description}
 `;
@@ -60,7 +60,7 @@ ${content.description}
   ctx.response.body = html;
 }
 
-type GetByIdContext = RouterContext<`${string}:title`, { title: string }>;
+type GetByIdContext = RouterContext<`${string}:title`, { title: string; }>;
 async function getPost(ctx: GetByIdContext) {
   const title = ctx.params.title;
 
