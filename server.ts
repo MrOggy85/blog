@@ -1,8 +1,4 @@
-import {
-  Application,
-  Context,
-  Router,
-} from "./deps.ts";
+import { Application, Context, Router } from "./deps.ts";
 import initPostsRoutes from "./route.ts";
 
 function logger(ctx: Context) {
@@ -19,7 +15,7 @@ function initServer() {
     try {
       await context.send({
         root,
-        index: '/',
+        index: "/",
       });
     } catch {
       await next();
@@ -41,8 +37,6 @@ function initServer() {
       logger(ctx);
     }
   });
-
-
 
   const router = new Router();
   initPostsRoutes(router);

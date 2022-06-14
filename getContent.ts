@@ -15,27 +15,27 @@ function getContent(filename: string): Content {
   const decoder = new TextDecoder("utf-8");
   const data = Deno.readFileSync(path);
   const markdown = decoder.decode(data);
-  const [_, metadataRaw, content] = markdown.split('---');
+  const [_, metadataRaw, content] = markdown.split("---");
 
-  const rows = metadataRaw.split('\n');
+  const rows = metadataRaw.split("\n");
   const metadata: Record<string, string> = {};
-  rows.forEach(x => {
-    const [key, value] = x.split(':');
+  rows.forEach((x) => {
+    const [key, value] = x.split(":");
     if (key && value) {
       metadata[key] = value.trim();
     }
   });
 
   return {
-    title: metadata['title'],
-    description: metadata['description'],
-    img: metadata['img'],
-    alt: metadata['alt'],
-    width: metadata['width'],
-    height: metadata['height'],
-    date: metadata['date'],
+    title: metadata["title"],
+    description: metadata["description"],
+    img: metadata["img"],
+    alt: metadata["alt"],
+    width: metadata["width"],
+    height: metadata["height"],
+    date: metadata["date"],
     content,
-    slug: filename.split('.md')[0],
+    slug: filename.split(".md")[0],
   };
 }
 

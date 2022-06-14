@@ -14,9 +14,18 @@ tags:
   - markdown
 ---
 
-The random name generation comes from this package in the moby repo. There is a list of adjectives and a list of famous scientists and hackers that gets randomly combined to form the names of the docker containers we all have come to love. The combinations are random with one exception of `boring_wozniak` since [*"Steve Wozniak is not boring"*](https://github.com/moby/moby/blob/master/pkg/namesgenerator/names-generator.go#L844) according to the comment.
+The random name generation comes from this package in the moby repo. There is a
+list of adjectives and a list of famous scientists and hackers that gets
+randomly combined to form the names of the docker containers we all have come to
+love. The combinations are random with one exception of `boring_wozniak` since
+[_"Steve Wozniak is not boring"_](https://github.com/moby/moby/blob/master/pkg/namesgenerator/names-generator.go#L844)
+according to the comment.
 
-The list is actively maintained and new scientists are added and also removed. After being accused of sexually abusing trafficking victims, Marvin Minsky was removed along with Richard Stallman that publicly defended his actions.
+The list is actively maintained and new scientists are added and also removed.
+After being accused of sexually abusing trafficking victims, Marvin Minsky was
+removed along with Richard Stallman that publicly defended his actions.
 
-* related article: https://frightanic.com/computers/docker-default-container-names/
-* Image credit: https://www.praqma.com/stories/Deploying-to-kubernetes-as-part-of-a-pipeline/
+- related article:
+  https://frightanic.com/computers/docker-default-container-names/
+- Image credit:
+  https://www.praqma.com/stories/Deploying-to-kubernetes-as-part-of-a-pipeline/

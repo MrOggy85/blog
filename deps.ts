@@ -6,8 +6,6 @@ export {
   Router,
 } from "https://deno.land/x/oak@v10.6.0/mod.ts";
 
-export type {
-  RouterContext,
-} from "https://deno.land/x/oak@v10.6.0/mod.ts";
+export type { RouterContext } from "https://deno.land/x/oak@v10.6.0/mod.ts";
 
 export { parse } from "https://deno.land/std@0.143.0/datetime/mod.ts";

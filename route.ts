@@ -1,10 +1,10 @@
-import { Context, Router, RouterContext, CSS, render, parse } from "./deps.ts";
+import { Context, CSS, parse, render, Router, RouterContext } from "./deps.ts";
 import getContent from "./getContent.ts";
 
 const ROUTE = "/";
 
-const CSS_PLACEHOLDER = '/* %CSS% */';
-const BODY_PLACEHOLDER = '%body%';
+const CSS_PLACEHOLDER = "/* %CSS% */";
+const BODY_PLACEHOLDER = "%body%";
 
 function getHtml(body: string) {
   const path = `./index.html`;
@@ -29,9 +29,7 @@ async function getAll(ctx: Context) {
   const url = ctx.request.url;
   const baseUrl = `${url.protocol}//${url.host}`;
 
-
-
-  const hej: { markdown: string; date: Date; }[] = [];
+  const hej: { markdown: string; date: Date }[] = [];
   for await (const dirEntry of Deno.readDir("./markdown")) {
     const content = getContent(dirEntry.name);
     const markdown = `
@@ -40,7 +38,7 @@ async function getAll(ctx: Context) {
 ${content.description}
 `;
 
-    const date = parse(content.date, 'dd/MM/yyyy');
+    const date = parse(content.date, "dd/MM/yyyy");
 
     hej.push({ markdown, date });
   }
@@ -49,19 +47,18 @@ ${content.description}
     return b.date.getTime() - a.date.getTime();
   });
 
-  const contentMarkdown = hejOrdered.map(x => x.markdown).join('');
+  const contentMarkdown = hejOrdered.map((x) => x.markdown).join("");
 
   const titleMarkdown = getTitleMarkdown(ctx);
-  const body =
-    `${titleMarkdown}` +
+  const body = `${titleMarkdown}` +
     `${render(`${contentMarkdown}`, {})}`;
   const html = getHtml(body);
 
-  ctx.response.headers.set('content-type', 'text/html');
+  ctx.response.headers.set("content-type", "text/html");
   ctx.response.body = html;
 }
 
-type GetByIdContext = RouterContext<"/:title", { title: string; }>;
+type GetByIdContext = RouterContext<"/:title", { title: string }>;
 function getPost(ctx: GetByIdContext) {
   const title = ctx.params.title;
 
@@ -81,10 +78,13 @@ ${content.description}
 ![${content.alt}](${content.img})
   `;
 
-  const body = render(`${titleMarkdown} ${headerMarkdown} ${content.content}`, {});
+  const body = render(
+    `${titleMarkdown} ${headerMarkdown} ${content.content}`,
+    {},
+  );
   const html = getHtml(body);
 
-  ctx.response.headers.set('content-type', 'text/html');
+  ctx.response.headers.set("content-type", "text/html");
   ctx.response.body = html;
 }
 
