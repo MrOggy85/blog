@@ -6,10 +6,10 @@ const ROUTE = "/";
 const CSS_PLACEHOLDER = "/* %CSS% */";
 const BODY_PLACEHOLDER = "%body%";
 
-function getHtml(body: string) {
+async function getHtml(body: string) {
   const path = `./index.html`;
   const decoder = new TextDecoder("utf-8");
-  const data = Deno.readFileSync(path);
+  const data = await Deno.readFile(path);
   const html = decoder.decode(data);
 
   return html.replace(CSS_PLACEHOLDER, CSS).replace(BODY_PLACEHOLDER, body);
@@ -52,7 +52,7 @@ ${content.description}
   const titleMarkdown = getTitleMarkdown(ctx);
   const body = `${titleMarkdown}` +
     `${render(`${contentMarkdown}`, {})}`;
-  const html = getHtml(body);
+  const html = await getHtml(body);
 
   ctx.response.headers.set("content-type", "text/html");
   ctx.response.body = html;
@@ -82,7 +82,7 @@ ${content.description}
     `${titleMarkdown} ${headerMarkdown} ${content.content}`,
     {},
   );
-  const html = getHtml(body);
+  const html = await getHtml(body);
 
   ctx.response.headers.set("content-type", "text/html");
   ctx.response.body = html;
