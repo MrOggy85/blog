@@ -1,12 +1,8 @@
 import { Context, CSS, parse, render, Router, RouterContext } from "./deps.ts";
 import getContent from "./getContent.ts";
 
-// const BASE_URL = Deno.env.get("BASE_URL") || "/";
-// console.log("BASE_URL", BASE_URL);
-
 const CSS_PLACEHOLDER = "/* %CSS% */";
 const BODY_PLACEHOLDER = "%body%";
-// const BASE_URL_PLACEHOLDER = "%base_url%";
 
 async function getHtml(body: string) {
   const path = `./index.html`;
@@ -17,20 +13,15 @@ async function getHtml(body: string) {
   return html
     .replace(CSS_PLACEHOLDER, CSS)
     .replace(BODY_PLACEHOLDER, body);
-  // .replaceAll(BASE_URL_PLACEHOLDER, BASE_URL);
 }
 
-function getTitleMarkdown(ctx: Context) {
-  const titleMarkdown = `
+function getTitleHtml() {
+  return `
 <h1 style="font-size:4em;"><a href="">Oskar Okuno's Blog</a></h1>
-`;
-
-  return titleMarkdown;
+`;;
 }
 
 async function getAll(ctx: Context) {
-  // const baseUrl = `${BASE_URL}`;
-
   const hej: { markdown: string; date: Date; }[] = [];
   for await (const dirEntry of Deno.readDir("./markdown")) {
     const content = await getContent(dirEntry.name);
@@ -51,8 +42,8 @@ ${content.description}
 
   const contentMarkdown = hejOrdered.map((x) => x.markdown).join("");
 
-  const titleMarkdown = getTitleMarkdown(ctx);
-  const body = `${titleMarkdown}` +
+  const titleHtml = getTitleHtml();
+  const body = `${titleHtml}` +
     `${render(`${contentMarkdown}`, {})}`;
   const html = await getHtml(body);
 
@@ -66,7 +57,7 @@ async function getPost(ctx: GetByIdContext) {
 
   const content = await getContent(`${title}.md`);
   const titleMarkdown = `
-  <header><a href="../">Oskar Okuno's Blog</a></header>
+  <header><a href="./">Oskar Okuno's Blog</a></header>
   `;
   const headerMarkdown = `
 # ${content.title}
