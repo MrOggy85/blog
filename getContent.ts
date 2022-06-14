@@ -10,10 +10,10 @@ type Content = {
   date: string;
 };
 
-function getContent(filename: string): Content {
+async function getContent(filename: string): Promise<Content> {
   const path = `./markdown/${filename}`;
   const decoder = new TextDecoder("utf-8");
-  const data = Deno.readFileSync(path);
+  const data = await Deno.readFile(path);
   const markdown = decoder.decode(data);
   const [_, metadataRaw, content] = markdown.split("---");
 

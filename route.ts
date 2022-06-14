@@ -29,9 +29,9 @@ async function getAll(ctx: Context) {
   const url = ctx.request.url;
   const baseUrl = `${url.protocol}//${url.host}`;
 
-  const hej: { markdown: string; date: Date }[] = [];
+  const hej: { markdown: string; date: Date; }[] = [];
   for await (const dirEntry of Deno.readDir("./markdown")) {
-    const content = getContent(dirEntry.name);
+    const content = await getContent(dirEntry.name);
     const markdown = `
 ## [${content.title}](${baseUrl}/${content.slug})
 
@@ -58,11 +58,11 @@ ${content.description}
   ctx.response.body = html;
 }
 
-type GetByIdContext = RouterContext<"/:title", { title: string }>;
-function getPost(ctx: GetByIdContext) {
+type GetByIdContext = RouterContext<"/:title", { title: string; }>;
+async function getPost(ctx: GetByIdContext) {
   const title = ctx.params.title;
 
-  const content = getContent(`${title}.md`);
+  const content = await getContent(`${title}.md`);
   const url = ctx.request.url;
   const baseUrl = `${url.protocol}//${url.host}`;
 
