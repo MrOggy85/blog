@@ -1,6 +1,8 @@
 import { Application, Context, Router } from "./deps.ts";
 import initPostsRoutes from "./route.ts";
 
+const BASE_URL = Deno.env.get("BASE_URL") || "/";
+
 function logger(ctx: Context) {
   console.log(
     `[${ctx.request.ip}] ${ctx.request.method} ${ctx.request.url} - ${ctx.response.status}`,
@@ -12,10 +14,12 @@ function initServer() {
 
   app.use(async (context, next) => {
     const root = `${Deno.cwd()}/static`;
+    const path = context.request.url.pathname.replace(BASE_URL, "");
     try {
       await context.send({
+        path,
         root,
-        index: "/",
+        index: BASE_URL,
       });
     } catch {
       await next();

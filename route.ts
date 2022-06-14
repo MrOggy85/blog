@@ -1,10 +1,12 @@
 import { Context, CSS, parse, render, Router, RouterContext } from "./deps.ts";
 import getContent from "./getContent.ts";
 
-const ROUTE = "/";
+const BASE_URL = Deno.env.get("BASE_URL") || "/";
+console.log("BASE_URL", BASE_URL);
 
 const CSS_PLACEHOLDER = "/* %CSS% */";
 const BODY_PLACEHOLDER = "%body%";
+const BASE_URL_PLACEHOLDER = "%base_url%";
 
 async function getHtml(body: string) {
   const path = `./index.html`;
@@ -12,28 +14,28 @@ async function getHtml(body: string) {
   const data = await Deno.readFile(path);
   const html = decoder.decode(data);
 
-  return html.replace(CSS_PLACEHOLDER, CSS).replace(BODY_PLACEHOLDER, body);
+  return html
+    .replace(CSS_PLACEHOLDER, CSS)
+    .replace(BODY_PLACEHOLDER, body)
+    .replaceAll(BASE_URL_PLACEHOLDER, BASE_URL);
 }
 
 function getTitleMarkdown(ctx: Context) {
-  const url = ctx.request.url;
-  const baseUrl = `${url.protocol}//${url.host}`;
   const titleMarkdown = `
-<h1 style="font-size:4em;"><a href="${baseUrl}/">Oskar Okuno's Blog</a></h1>
+<h1 style="font-size:4em;"><a href="${BASE_URL}">Oskar Okuno's Blog</a></h1>
 `;
 
   return titleMarkdown;
 }
 
 async function getAll(ctx: Context) {
-  const url = ctx.request.url;
-  const baseUrl = `${url.protocol}//${url.host}`;
+  const baseUrl = `${BASE_URL}`;
 
-  const hej: { markdown: string; date: Date; }[] = [];
+  const hej: { markdown: string; date: Date }[] = [];
   for await (const dirEntry of Deno.readDir("./markdown")) {
     const content = await getContent(dirEntry.name);
     const markdown = `
-## [${content.title}](${baseUrl}/${content.slug})
+## [${content.title}](${baseUrl}${content.slug})
 
 ${content.description}
 `;
@@ -58,16 +60,13 @@ ${content.description}
   ctx.response.body = html;
 }
 
-type GetByIdContext = RouterContext<"/:title", { title: string; }>;
+type GetByIdContext = RouterContext<`${string}:title`, { title: string }>;
 async function getPost(ctx: GetByIdContext) {
   const title = ctx.params.title;
 
   const content = await getContent(`${title}.md`);
-  const url = ctx.request.url;
-  const baseUrl = `${url.protocol}//${url.host}`;
-
   const titleMarkdown = `
-  <header><a href="${baseUrl}/">Oskar Okuno's Blog</a></header>
+  <header><a href="${BASE_URL}">Oskar Okuno's Blog</a></header>
   `;
   const headerMarkdown = `
 # ${content.title}
@@ -90,8 +89,8 @@ ${content.description}
 
 function init(router: Router) {
   router
-    .get(ROUTE, getAll)
-    .get(`${ROUTE}:title`, getPost);
+    .get(BASE_URL, getAll)
+    .get(`${BASE_URL}:title`, getPost);
 }
 
 export default init;
