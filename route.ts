@@ -1,8 +1,8 @@
 import { Context, CSS, parse, render, Router, RouterContext } from "./deps.ts";
 import getContent from "./getContent.ts";
 
-const BASE_URL = Deno.env.get("BASE_URL") || "/";
-console.log("BASE_URL", BASE_URL);
+// const BASE_URL = Deno.env.get("BASE_URL") || "/";
+// console.log("BASE_URL", BASE_URL);
 
 const CSS_PLACEHOLDER = "/* %CSS% */";
 const BODY_PLACEHOLDER = "%body%";
@@ -60,13 +60,13 @@ ${content.description}
   ctx.response.body = html;
 }
 
-type GetByIdContext = RouterContext<`${string}:title`, { title: string; }>;
+type GetByIdContext = RouterContext<'/:title', { title: string; }>;
 async function getPost(ctx: GetByIdContext) {
   const title = ctx.params.title;
 
   const content = await getContent(`${title}.md`);
   const titleMarkdown = `
-  <header><a href="">Oskar Okuno's Blog</a></header>
+  <header><a href="../">Oskar Okuno's Blog</a></header>
   `;
   const headerMarkdown = `
 # ${content.title}
@@ -89,8 +89,8 @@ ${content.description}
 
 function init(router: Router) {
   router
-    .get(BASE_URL, getAll)
-    .get(`${BASE_URL}:title`, getPost);
+    .get('/', getAll)
+    .get('/:title', getPost);
 }
 
 export default init;
