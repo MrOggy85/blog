@@ -22,7 +22,7 @@ async function getHtml(body: string) {
 
 function getTitleMarkdown(ctx: Context) {
   const titleMarkdown = `
-<h1 style="font-size:4em;"><a href="${BASE_URL}">Oskar Okuno's Blog</a></h1>
+<h1 style="font-size:4em;"><a href="">Oskar Okuno's Blog</a></h1>
 `;
 
   return titleMarkdown;
@@ -66,7 +66,7 @@ async function getPost(ctx: GetByIdContext) {
 
   const content = await getContent(`${title}.md`);
   const titleMarkdown = `
-  <header><a href="${BASE_URL}">Oskar Okuno's Blog</a></header>
+  <header><a href="">Oskar Okuno's Blog</a></header>
   `;
   const headerMarkdown = `
 # ${content.title}
