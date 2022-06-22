@@ -18,17 +18,17 @@ async function getHtml(body: string) {
 function getTitleHtml() {
   return `
 <h1 style="font-size:4em;"><a href="">Oskar Okuno's Blog</a></h1>
-`;;
+`;
 }
 
 async function getAll(ctx: Context) {
-  const hej: { markdown: string; date: Date; }[] = [];
+  const hej: { markdown: string; date: Date }[] = [];
   for await (const dirEntry of Deno.readDir("./markdown")) {
     const content = await getContent(dirEntry.name);
     const markdown = `
 ## [${content.title}](${content.slug})
 
-${content.description}
+### ${content.description}
 `;
 
     const date = parse(content.date, "dd/MM/yyyy");
@@ -51,7 +51,7 @@ ${content.description}
   ctx.response.body = html;
 }
 
-type GetByIdContext = RouterContext<'/:title', { title: string; }>;
+type GetByIdContext = RouterContext<"/:title", { title: string }>;
 async function getPost(ctx: GetByIdContext) {
   const title = ctx.params.title;
 
@@ -80,8 +80,8 @@ ${content.description}
 
 function init(router: Router) {
   router
-    .get('/', getAll)
-    .get('/:title', getPost);
+    .get("/", getAll)
+    .get("/:title", getPost);
 }
 
 export default init;
