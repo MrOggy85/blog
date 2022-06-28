@@ -3,11 +3,13 @@ title: iTerm2 Triggers
 description: 'Supercharge your terminal'
 slug: perfect-code
 date: 22/06/2022
-img: iterm2-triggers/pexels-thisisengineering-3861969.jpeg
+img: iterm2-triggers/pc-with-rainbow.png
 alt: 'Code in terminal'
 width: 1920
 height: 1283
 ---
+
+> created using [craiyon.com](https://www.craiyon.com/)
 
 <a href="https://www.urbandictionary.com/define.php?term=TIL" target="_blank">TIL</a>
 about
@@ -38,6 +40,8 @@ Regular Expression:
   height="768"
 />
 
+> Look at all those hacker attempts... Now in gold color!
+
 ## Link to Jira
 
 Another nice feature is to add a clickable link to the Jira ticket. For example
@@ -48,3 +52,12 @@ directly to the Jira ticket in the browser.
 - Action: `Make Hyperlink`
 - Parameters `https://jira.your-company.jp/browse/\0` (replace "your-company"
   with your company's subdomain)
+
+<img
+src="iterm2-triggers/hacker.png"
+alt="Terminal Hacker"
+width="256"
+height="256"
+/>
+
+> created using [craiyon.com](https://www.craiyon.com/)
