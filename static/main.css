@@ -28,10 +28,18 @@ body .markdown-body h3,
 body .markdown-body p {
   text-align: center;
   color: #dad8d8;
-  font-weight: 300;
   letter-spacing: 0;
   line-height: 1.6;
 }
+
+body .markdown-body code {
+  background-color: #373739;
+}
+
+body .markdown-body a>code {
+  color: #A6CEFC;
+}
+
 
 body .markdown-body p {
   text-align: left;
