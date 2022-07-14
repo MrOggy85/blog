@@ -2,6 +2,12 @@ body {
   margin: 0;
 }
 
+@media screen and (max-width: 600px) {
+  body {
+    padding: 1em;
+  }
+}
+
 main {
   margin: 0 auto;
   max-width: 600px;
