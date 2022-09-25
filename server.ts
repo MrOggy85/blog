@@ -12,15 +12,20 @@ function logger(ctx: Context) {
 function initServer() {
   const app = new Application();
 
-  app.use(async (context, next) => {
+  app.use(async (ctx, next) => {
     const root = `${Deno.cwd()}/static`;
-    const path = context.request.url.pathname.replace(BASE_URL, "");
+    const path = ctx.request.url.pathname.replace(BASE_URL, "");
+
     try {
-      await context.send({
+      if (!path.endsWith('/')) {
+        ctx.response.headers.append('Cache-Control', 'max-age=604800')
+      }
+      const _result = await ctx.send({
         path,
         root,
         index: BASE_URL,
       });
+
     } catch {
       await next();
     }
