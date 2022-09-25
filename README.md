@@ -3,12 +3,13 @@
 This is my blog powered by Deno where I write in Markdown and gets served by
 Deno Deploy
 
+## Requirements
+
+- `deno` - [[_install_]](https://deno.land/#installation)
+- `denon` (optional) [[_install_]](https://github.com/denosaurs/denon/)
+
 ## Development
 
-```bash
-# install dependencies
+```sh
 $ ./run.sh
 ```
-
-For detailed explanation on how things work, check out
-[Deno docs](https://deno.land/).
