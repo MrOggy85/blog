@@ -28,6 +28,15 @@ body .markdown-body img {
   display: block;
 }
 
+body .markdown-body .main img {
+  width: 100px;
+  height: 100%;
+  margin: 0 auto;
+  display: block;
+  filter: grayscale(70%);
+  -webkit-filter: grayscale(70%);
+}
+
 body .markdown-body h1,
 body .markdown-body h2,
 body .markdown-body h3,

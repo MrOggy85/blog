@@ -26,6 +26,8 @@ async function getAll(ctx: Context) {
   for await (const dirEntry of Deno.readDir("./markdown")) {
     const content = await getContent(dirEntry.name);
     const markdown = `
+<img src="${content.img}" alt="${content.alt}" />
+
 ## [${content.title}](${content.slug})
 
 ### ${content.description}
@@ -45,7 +47,8 @@ async function getAll(ctx: Context) {
   const titleHtml = getTitleHtml();
   const body = `${titleHtml}` +
     `${render(`${contentMarkdown}`, {})}`;
-  const html = await getHtml(body);
+
+  const html = await getHtml(`<div class="main">${body}</div>`);
 
   ctx.response.headers.set("content-type", "text/html");
   ctx.response.body = html;
@@ -72,7 +75,7 @@ ${content.description}
     `${titleMarkdown} ${headerMarkdown} ${content.content}`,
     {},
   );
-  const html = await getHtml(body);
+  const html = await getHtml(`<div>${body}</div>`);
 
   ctx.response.headers.set("content-type", "text/html");
   ctx.response.body = html;
