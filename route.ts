@@ -26,9 +26,7 @@ async function getAll(ctx: Context) {
   for await (const dirEntry of Deno.readDir("./markdown")) {
     const content = await getContent(dirEntry.name);
     const markdown = `
-<img src="${content.img}" alt="${content.alt}" />
-
-## [${content.title}](${content.slug})
+## [<img src="${content.img}" alt="${content.alt}" /> ${content.title}](${content.slug})
 
 ### ${content.description}
 `;
