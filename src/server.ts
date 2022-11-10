@@ -13,19 +13,18 @@ function initServer() {
   const app = new Application();
 
   app.use(async (ctx, next) => {
-    const root = `${Deno.cwd()}/static`;
+    const root = `${Deno.cwd()}/../static`;
     const path = ctx.request.url.pathname.replace(BASE_URL, "");
 
     try {
-      if (!path.endsWith('/')) {
-        ctx.response.headers.append('Cache-Control', 'max-age=604800')
+      if (!path.endsWith("/")) {
+        ctx.response.headers.append("Cache-Control", "max-age=604800");
       }
       const _result = await ctx.send({
         path,
         root,
         index: BASE_URL,
       });
-
     } catch {
       await next();
     }
