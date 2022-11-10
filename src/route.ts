@@ -1,3 +1,4 @@
+import { CWD } from "./constants.ts";
 import { Context, CSS, parse, render, Router, RouterContext } from "./deps.ts";
 import getContent from "./getContent.ts";
 
@@ -5,7 +6,7 @@ const CSS_PLACEHOLDER = "/* %CSS% */";
 const BODY_PLACEHOLDER = "%body%";
 
 async function getHtml(body: string) {
-  const data = await Deno.readFile(`${Deno.cwd()}/index.html`);
+  const data = await Deno.readFile(`${CWD}/../index.html`);
   const html = new TextDecoder("utf-8").decode(data);
 
   return html
@@ -21,7 +22,7 @@ function getTitleHtml() {
 
 async function getAll(ctx: Context) {
   const hej: { markdown: string; date: Date }[] = [];
-  for await (const dirEntry of Deno.readDir(`${Deno.cwd()}/markdown`)) {
+  for await (const dirEntry of Deno.readDir(`${CWD}/../markdown`)) {
     const content = await getContent(dirEntry.name);
     const markdown = `
 ## [<img src="${content.img}" alt="${content.alt}" /> ${content.title}](${content.slug})

@@ -1,3 +1,4 @@
+import { CWD } from "./constants.ts";
 import { Application, Context, Router } from "./deps.ts";
 import initPostsRoutes from "./route.ts";
 
@@ -13,7 +14,7 @@ function initServer() {
   const app = new Application();
 
   app.use(async (ctx, next) => {
-    const root = `${Deno.cwd()}/../static`;
+    const root = `${CWD}/../static`;
     const path = ctx.request.url.pathname.replace(BASE_URL, "");
 
     try {

@@ -1,3 +1,5 @@
+import { CWD } from "./constants.ts";
+
 type Content = {
   title: string;
   description: string;
@@ -11,7 +13,7 @@ type Content = {
 };
 
 async function getContent(filename: string): Promise<Content> {
-  const path = `${Deno.cwd()}/markdown/${filename}`;
+  const path = `${CWD}/../markdown/${filename}`;
   const decoder = new TextDecoder("utf-8");
   const data = await Deno.readFile(path);
   const markdown = decoder.decode(data);
