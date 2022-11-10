@@ -6,7 +6,6 @@ Deno Deploy
 ## Requirements
 
 - `deno` - [[_install_]](https://deno.land/#installation)
-- `denon` (optional) [[_install_]](https://github.com/denosaurs/denon/)
 
 ## Development
 
