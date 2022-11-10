@@ -5,10 +5,8 @@ const CSS_PLACEHOLDER = "/* %CSS% */";
 const BODY_PLACEHOLDER = "%body%";
 
 async function getHtml(body: string) {
-  const path = `./index.html`;
-  const decoder = new TextDecoder("utf-8");
-  const data = await Deno.readFile(path);
-  const html = decoder.decode(data);
+  const data = await Deno.readFile(`${Deno.cwd()}/index.html`);
+  const html = new TextDecoder("utf-8").decode(data);
 
   return html
     .replace(CSS_PLACEHOLDER, CSS)
@@ -23,7 +21,7 @@ function getTitleHtml() {
 
 async function getAll(ctx: Context) {
   const hej: { markdown: string; date: Date }[] = [];
-  for await (const dirEntry of Deno.readDir("./markdown")) {
+  for await (const dirEntry of Deno.readDir(`${Deno.cwd()}/markdown`)) {
     const content = await getContent(dirEntry.name);
     const markdown = `
 ## [<img src="${content.img}" alt="${content.alt}" /> ${content.title}](${content.slug})
