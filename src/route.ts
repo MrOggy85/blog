@@ -93,13 +93,12 @@ async function getFeed(ctx: Context) {
     title: "Oskar Okuno Blog",
     feed_url: "https://example.com/rss.xml",
     site_url: "https://okuno.se/blog/",
-    home_page_url: "https://okuno.se/blog/",
     managingEditor: "Oskar Okuno",
     webMaster: "Oskar Okuno",
     copyright: "2022 Oskar Okuno",
     language: "en",
-    favicon: "https://okuno.se/blog/favicon.ico",
-    ttl: "60",
+    image_url: "https://okuno.se/blog/favicon.ico",
+    ttl: 60,
   });
 
   const contentsUnsorted: { content: Content; date: Date }[] = [];
@@ -115,10 +114,11 @@ async function getFeed(ctx: Context) {
 
   contentsSorted.forEach((x) => {
     feed.item({
-      id: x.content.slug,
+      guid: x.content.slug,
       title: x.content.title,
       description: x.content.description,
       url: `https://okuno.se/blog/${x.content.slug}`,
+      date: x.content.date,
     });
   });
 
