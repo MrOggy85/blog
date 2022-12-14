@@ -9,3 +9,5 @@ export {
 export type { RouterContext } from "https://deno.land/x/oak@v11.1.0/mod.ts";
 
 export { parse } from "https://deno.land/std@0.163.0/datetime/mod.ts";
+
+export { default as RSS } from "npm:rss@^1.2.2";

@@ -1,5 +1,5 @@
 import { CWD } from "./constants.ts";
-import { Context, CSS, parse, render, Router, RouterContext } from "./deps.ts";
+import { Context, CSS, parse, render, Router, RouterContext, RSS } from "./deps.ts";
 import getContent from "./getContent.ts";
 
 const CSS_PLACEHOLDER = "/* %CSS% */";
@@ -78,9 +78,54 @@ ${content.description}
   ctx.response.body = html;
 }
 
+type Content = Awaited<ReturnType<typeof getContent>>
+
+async function getFeed(ctx: Context) {
+  const feed = new RSS({
+    title: 'Oskar Okuno Blog',
+    feed_url: 'https://example.com/rss.xml',
+    site_url: 'https://okuno.se/blog/',
+    home_page_url: 'https://okuno.se/blog/',
+    managingEditor: 'Oskar Okuno',
+    webMaster: 'Oskar Okuno',
+    copyright: '2022 Oskar Okuno',
+    language: 'en',
+    favicon: 'https://okuno.se/blog/favicon.ico',
+    ttl: '60',
+  });
+
+  const contentsUnsorted: { content: Content; date: Date }[] = [];
+  for await (const dirEntry of Deno.readDir(`${CWD}/../markdown`)) {
+    const content = await getContent(dirEntry.name);
+    const date = parse(content.date, "dd/MM/yyyy");
+    contentsUnsorted.push({ content, date });
+  }
+
+  const contentsSorted = contentsUnsorted.sort((a, b) => {
+    return b.date.getTime() - a.date.getTime();
+  });
+
+  contentsSorted.forEach((x) => {
+    feed.item({
+      id: x.content.slug,
+      title: x.content.title,
+      description: x.content.description,
+      url: `https://okuno.se/blog/${x.content.slug}`,
+    });
+  })
+
+
+
+  const xml = feed.xml({indent: true});
+
+  ctx.response.headers.set("content-type", "application/rss+xml");
+  ctx.response.body = xml;
+}
+
 function init(router: Router) {
   router
     .get("/", getAll)
+    .get("/rss.xml", getFeed)
     .get("/:title", getPost);
 }
 
