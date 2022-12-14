@@ -2,11 +2,11 @@ import { CWD } from "./constants.ts";
 import {
   Context,
   CSS,
+  Feed,
   parse,
   render,
   Router,
   RouterContext,
-  RSS,
 } from "./deps.ts";
 import getContent from "./getContent.ts";
 
@@ -88,17 +88,27 @@ ${content.description}
 
 type Content = Awaited<ReturnType<typeof getContent>>;
 
-async function getFeed(ctx: Context) {
-  const feed = new RSS({
+async function getFeed() {
+  const feed = new Feed({
     title: "Oskar Okuno Blog",
-    feed_url: "https://example.com/rss.xml",
-    site_url: "https://okuno.se/blog/",
-    managingEditor: "Oskar Okuno",
-    webMaster: "Oskar Okuno",
+    id: "https://okuno.se/blog/",
+    description:
+      "Oskar Okuno is a Fullstack Dev with experince with React, React Native, Vue. As a Fullstack Dev he also uses Node.js, Go, Java and C#.",
+    link: "https://okuno.se/blog/",
     copyright: "2022 Oskar Okuno",
     language: "en",
-    image_url: "https://okuno.se/blog/favicon.ico",
+    favicon: "https://okuno.se/blog/favicon.ico",
     ttl: 60,
+    author: {
+      name: "Oskar Okuno",
+      email: "johndoe@example.com",
+      link: "https://okuno.se",
+    },
+    feedLinks: {
+      json: "https://okuno.se/blog/json",
+      atom: "https://okuno.se/blog/atom",
+      rss: "https://okuno.se/blog/rss",
+    },
   });
 
   const contentsUnsorted: { content: Content; date: Date }[] = [];
@@ -113,25 +123,50 @@ async function getFeed(ctx: Context) {
   });
 
   contentsSorted.forEach((x) => {
-    feed.item({
-      guid: x.content.slug,
+    feed.addItem({
+      id: x.content.slug,
       title: x.content.title,
       description: x.content.description,
-      url: `https://okuno.se/blog/${x.content.slug}`,
-      date: x.content.date,
+      content: x.content.content,
+      link: `https://okuno.se/blog/${x.content.slug}`,
+      date: x.date,
+      image: `https://okuno.se/blog/${x.content.img}`,
     });
   });
 
-  const xml = feed.xml({ indent: true });
+  return feed;
+}
 
-  ctx.response.headers.set("content-type", "application/rss+xml");
-  ctx.response.body = xml;
+async function getRss(ctx: Context) {
+  const feed = await getFeed();
+
+  ctx.response.headers.set(
+    "content-type",
+    "application/rss+xml; charset=utf-8",
+  );
+  ctx.response.body = feed.rss2();
+}
+
+async function getAtom(ctx: Context) {
+  const feed = await getFeed();
+
+  ctx.response.headers.set("content-type", "application/xml; charset=utf-8");
+  ctx.response.body = feed.atom1();
+}
+
+async function getJson(ctx: Context) {
+  const feed = await getFeed();
+
+  ctx.response.headers.set("content-type", "application/json");
+  ctx.response.body = feed.json1();
 }
 
 function init(router: Router) {
   router
     .get("/", getAll)
-    .get("/rss.xml", getFeed)
+    .get("/rss", getRss)
+    .get("/atom", getAtom)
+    .get("/json", getJson)
     .get("/:title", getPost);
 }
 
