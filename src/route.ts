@@ -124,10 +124,10 @@ async function getFeed() {
 
   contentsSorted.forEach((x) => {
     feed.addItem({
-      id: x.content.slug,
+      id: `https://okuno.se/blog/${x.content.slug}`,
       title: x.content.title,
       description: x.content.description,
-      content: x.content.content,
+      content: render(x.content.content),
       link: `https://okuno.se/blog/${x.content.slug}`,
       date: x.date,
       image: `https://okuno.se/blog/${x.content.img}`,
