@@ -1,14 +1,7 @@
 import { CWD } from "./constants.ts";
-import {
-  Context,
-  CSS,
-  Feed,
-  parse,
-  render,
-  Router,
-  RouterContext,
-} from "./deps.ts";
+import { Context, CSS, Feed, parse, Router, RouterContext } from "./deps.ts";
 import getContent from "./getContent.ts";
+import { render } from "./gfm/render.ts";
 
 const CSS_PLACEHOLDER = "/* %CSS% */";
 const BODY_PLACEHOLDER = "%body%";
