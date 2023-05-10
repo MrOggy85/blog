@@ -1,4 +1,4 @@
-export { CSS } from "https://deno.land/x/gfm@0.1.26/mod.ts";
+export { CSS as GitHub_Flavored_Markdown_CSS  } from "https://deno.land/x/gfm@0.1.26/mod.ts";
 export {
   Application,
   Context,

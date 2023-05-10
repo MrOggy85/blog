@@ -1,18 +1,20 @@
 import { CWD } from "./constants.ts";
-import { Context, CSS, Feed, parse, Router, RouterContext } from "./deps.ts";
+import { Context, GitHub_Flavored_Markdown_CSS, Feed, parse, Router, RouterContext } from "./deps.ts";
 import getContent from "./getContent.ts";
 import { render } from "./gfm/render.ts";
 
-const CSS_PLACEHOLDER = "/* %CSS% */";
+const MARKDOWN_CSS_PLACEHOLDER = "/* %CSS% */";
 const BODY_PLACEHOLDER = "%body%";
+const CSS_FILE_PLACEHOLDER = "%CSS_FILE%";
 
-async function getHtml(body: string) {
+async function getHtml(body: string, cssFile: string) {
   const data = await Deno.readFile(`${CWD}/../index.html`);
   const html = new TextDecoder("utf-8").decode(data);
 
   return html
-    .replace(CSS_PLACEHOLDER, CSS)
-    .replace(BODY_PLACEHOLDER, body);
+    .replace(MARKDOWN_CSS_PLACEHOLDER, GitHub_Flavored_Markdown_CSS)
+    .replace(BODY_PLACEHOLDER, body)
+    .replace(CSS_FILE_PLACEHOLDER, cssFile);
 }
 
 function getTitleHtml() {
@@ -46,7 +48,7 @@ async function getAll(ctx: Context) {
   const body = `${titleHtml}` +
     `${render(`${contentMarkdown}`, {})}`;
 
-  const html = await getHtml(`<div class="main">${body}</div>`);
+  const html = await getHtml(`<div class="main">${body}</div>`, 'main.css');
 
   ctx.response.headers.set("content-type", "text/html");
   ctx.response.body = html;
@@ -73,7 +75,7 @@ ${content.description}
     `${titleMarkdown} ${headerMarkdown} ${content.content}`,
     {},
   );
-  const html = await getHtml(`<div>${body}</div>`);
+  const html = await getHtml(`<div>${body}</div>`, 'post.css');
 
   ctx.response.headers.set("content-type", "text/html");
   ctx.response.body = html;
