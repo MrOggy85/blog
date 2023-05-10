@@ -86,7 +86,7 @@ async function getFeed() {
     title: "Oskar Okuno Blog",
     id: "https://okuno.se/blog/",
     description:
-      "Oskar Okuno is a Fullstack Dev with experince with React, React Native, Vue. As a Fullstack Dev he also uses Node.js, Go, Java and C#.",
+      "Oskar Okuno is a Fullstack Dev experienced with React, React Native, Vue. As a Fullstack Dev he also uses Node.js, Go, Java and C#.",
     link: "https://okuno.se/blog/",
     copyright: "2022 Oskar Okuno",
     language: "en",
