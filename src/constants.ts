@@ -1,1 +1,1 @@
-export const CWD = "./src";
+export const CWD = './src';
