@@ -17,16 +17,16 @@ jobs:
       - name: Setup Deno
         uses: denoland/setup-deno@v1
         with:
-          deno-version: 1.35.3
+          deno-version: 2.2.6
 
       - name: Cache Dependencies
-        run: deno cache src/deps.ts
+        run: make cache-deps
 
-      - name: Run lint
-        run: deno lint --unstable ./src
+      - name: lint
+        run: make lint
 
-      - name: Run fmt
-        run: deno fmt --check ./src
+      - name: format
+        run: make format
 
-      - name: Run type check
-        run: deno check ./src/main.ts
+      - name: Typecheck
+        run: make typecheck
