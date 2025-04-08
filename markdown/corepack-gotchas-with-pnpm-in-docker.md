@@ -4,7 +4,7 @@ description: Security can sometimes blow up in your face
 slug: corepack-gotchas-with-pnpm-in-ocker
 date: 08/04/2025
 img: img/dev-frustrated-nodejs.jpg
-alt: "Frustrated Developer slapping himself in the face"
+alt: 'Frustrated Developer slapping himself in the face'
 width: 256
 height: 256
 ---
