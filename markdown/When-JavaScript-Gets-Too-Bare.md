@@ -34,11 +34,7 @@ In that light, it starts to make sense. Bare isn’t trying to be your daily dri
 
 Here’s where the pragmatist in me kicks in.
 
-If I’m using JavaScript because it’s easy and fast to work with, then Bare removes much of what makes it appealing. Now you need to:
-- Interface directly with C or C++
-- Manually integrate a JS engine like V8
-- Reimplement or port a standard library yourself
-- Understand low-level OS and system behavior
+If I’m using JavaScript because it’s easy and fast to work with, then Bare removes much of what makes it appealing. I don't want to care about C and low-level systems when writing Javascript.
 
 At that point, the question becomes clear:
 
@@ -47,23 +43,17 @@ At that point, the question becomes clear:
 # Why Golang Is Often a Better Fit
 
 Golang offers a compelling alternative:
-- Compiled to native code (no VM, no runtime)
-- Excellent cross-compilation support
-- A rich standard library: networking, file system, concurrency, etc.
-- Predictable performance and memory usage
-- Clean, simple syntax and fast development cycles
+- Compiles to native code (no VM, no runtime)
+- rich standard library
+- low cpu and memory usage
 
 For most real-world apps that need to run on low-resource environments (think IoT devices, routers, small VMs), Go gives you all the control you need—with the productivity and ecosystem that Bare is intentionally missing.
 
 # So When Is Bare a Good Fit?
 
-To be fair, Bare does have a niche. It might be the right choice if:
-- You have an existing JS codebase you want to port to a constrained environment
-- You’re building a custom embedded runtime where full control is critical
-- You’re exploring runtime architecture and want to experiment with JS from the ground up
-- You’re working in a system where integrating a JS engine is preferable to rewriting logic in C
+To be fair, Bare does have a niche. It might be the right choice if you have an existing JS codebase you want to port to a constrained environment. Instead of rewriting the business logic you can rewrite the underlying platform. whatever makes more sense for your project.
 
-In those cases, Bare is a great tool because it’s so minimal.
+In that case, Bare is a great tool because it’s so minimal.
 
 # Final Thoughts
 
