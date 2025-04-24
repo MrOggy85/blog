@@ -4,7 +4,7 @@ description: You know how gravity is usually explained with that downwards funne
 slug: what-does-gravity-actually-look-like
 date: 24/04/2025
 img: img/gravity.jpg
-alt: "gravity field rubber sheet"
+alt: gravity field rubber sheet
 width: 488
 height: 488
 ---
