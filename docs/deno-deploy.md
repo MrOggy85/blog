@@ -2,9 +2,17 @@
 
 Deployed via [console.deno.com](https://console.deno.com). Entrypoint: `src/main.ts`.
 
-Two things must be right or the deploy fails during the **warmup phase** (Deno
+Things that must be right or the deploy fails during the **warmup phase** (Deno
 Deploy boots the app and exercises it during the build; if it can't get a
-healthy app, it restarts in a loop and reports "Warm up failed").
+healthy app, it restarts in a loop across regions — ord, ams, … — and reports
+"Warm up failed").
+
+## 0. Use Deno.serve
+
+Deno Deploy detects readiness through `Deno.serve`. A server that opens a port
+another way (e.g. `Deno.serveHttp` / `Deno.listen`, as oak v12 did) is never
+registered as ready, so warmup fails even though the process is listening.
+`src/main.ts` uses `Deno.serve`.
 
 ## 1. Port
 

@@ -1,13 +1,15 @@
 # CLAUDE.md
 
-Personal blog. Deno + [oak](https://deno.land/x/oak), markdown posts rendered to HTML.
+Personal blog. Deno std lib only (`Deno.serve` + `serveDir`), markdown posts
+rendered to HTML. No web framework.
 
 ## Layout
 
 - `markdown/<slug>.md` — one file per post. The **filename is the slug** (the
   `slug:` frontmatter field is ignored, see `src/getContent.ts`).
 - `static/` — assets (`img/`, `gifs/`, css). Served from the URL root.
-- `src/` — server. `main.ts` (entry) → `server.ts` → `route.ts` → `getContent.ts`.
+- `src/` — server. `main.ts` (`Deno.serve`) → `server.ts` (static + router) →
+  `route.ts` (handlers return `Response`) → `getContent.ts`.
 
 ## Post frontmatter
 
