@@ -1,12 +1,5 @@
 import { CWD } from './constants.ts';
-import {
-	Context,
-	Feed,
-	GitHub_Flavored_Markdown_CSS,
-	parse,
-	Router,
-	RouterContext,
-} from './deps.ts';
+import { Feed, GitHub_Flavored_Markdown_CSS, parse } from './deps.ts';
 import getContent from './getContent.ts';
 import { render } from './gfm/render.ts';
 
@@ -30,8 +23,14 @@ function getTitleHtml() {
 `;
 }
 
-async function getAll(ctx: Context) {
-	const hej: { markdown: string; date: Date }[] = [];
+function htmlResponse(html: string) {
+	return new Response(html, {
+		headers: { 'content-type': 'text/html' },
+	});
+}
+
+export async function getAll(): Promise<Response> {
+	const posts: { markdown: string; date: Date }[] = [];
 	for await (const dirEntry of Deno.readDir(`${CWD}/../markdown`)) {
 		const content = await getContent(dirEntry.name);
 		const markdown = `
@@ -42,29 +41,24 @@ async function getAll(ctx: Context) {
 
 		const date = parse(content.date, 'dd/MM/yyyy');
 
-		hej.push({ markdown, date });
+		posts.push({ markdown, date });
 	}
 
-	const hejOrdered = hej.sort((a, b) => {
+	const ordered = posts.sort((a, b) => {
 		return b.date.getTime() - a.date.getTime();
 	});
 
-	const contentMarkdown = hejOrdered.map((x) => x.markdown).join('');
+	const contentMarkdown = ordered.map((x) => x.markdown).join('');
 
-	const titleHtml = getTitleHtml();
-	const body = `${titleHtml}` +
+	const body = `${getTitleHtml()}` +
 		`${render(`${contentMarkdown}`, {})}`;
 
 	const html = await getHtml(`<div class="main">${body}</div>`, 'main.css');
 
-	ctx.response.headers.set('content-type', 'text/html');
-	ctx.response.body = html;
+	return htmlResponse(html);
 }
 
-type GetByIdContext = RouterContext<'/:title', { title: string }>;
-async function getPost(ctx: GetByIdContext) {
-	const title = ctx.params.title;
-
+export async function getPost(title: string): Promise<Response> {
 	const content = await getContent(`${title}.md`);
 	const titleMarkdown = `
   <header><a href="./">Oskar Okuno's Blog</a></header>
@@ -84,8 +78,7 @@ ${content.description}
 	);
 	const html = await getHtml(`<div>${body}</div>`, 'post.css');
 
-	ctx.response.headers.set('content-type', 'text/html');
-	ctx.response.body = html;
+	return htmlResponse(html);
 }
 
 type Content = Awaited<ReturnType<typeof getContent>>;
@@ -139,37 +132,23 @@ async function getFeed() {
 	return feed;
 }
 
-async function getRss(ctx: Context) {
+export async function getRss(): Promise<Response> {
 	const feed = await getFeed();
-
-	ctx.response.headers.set(
-		'content-type',
-		'application/rss+xml; charset=utf-8',
-	);
-	ctx.response.body = feed.rss2();
+	return new Response(feed.rss2(), {
+		headers: { 'content-type': 'application/rss+xml; charset=utf-8' },
+	});
 }
 
-async function getAtom(ctx: Context) {
+export async function getAtom(): Promise<Response> {
 	const feed = await getFeed();
-
-	ctx.response.headers.set('content-type', 'application/xml; charset=utf-8');
-	ctx.response.body = feed.atom1();
+	return new Response(feed.atom1(), {
+		headers: { 'content-type': 'application/xml; charset=utf-8' },
+	});
 }
 
-async function getJson(ctx: Context) {
+export async function getJson(): Promise<Response> {
 	const feed = await getFeed();
-
-	ctx.response.headers.set('content-type', 'application/json');
-	ctx.response.body = feed.json1();
+	return new Response(feed.json1(), {
+		headers: { 'content-type': 'application/json' },
+	});
 }
-
-function init(router: Router) {
-	router
-		.get('/', getAll)
-		.get('/rss', getRss)
-		.get('/atom', getAtom)
-		.get('/json', getJson)
-		.get('/:title', getPost);
-}
-
-export default init;

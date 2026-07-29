@@ -1,13 +1,6 @@
 export { CSS as GitHub_Flavored_Markdown_CSS } from 'jsr:@deno/gfm';
-export {
-	Application,
-	Context,
-	helpers,
-	Router,
-} from 'https://deno.land/x/oak@v12.4.0/mod.ts';
 
-export type { RouterContext } from 'https://deno.land/x/oak@v12.4.0/mod.ts';
-
+export { serveDir } from 'https://deno.land/std@0.186.0/http/file_server.ts';
 export { parse } from 'https://deno.land/std@0.186.0/datetime/mod.ts';
 
 export { Feed } from 'npm:feed@4.2.2';
