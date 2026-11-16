@@ -27,6 +27,20 @@ const RIDGE =
 <path class="near" d="M0 40 L0 32 L58 24 L104 33 L152 18 L211 30 L262 16 L318 28 L360 21 L400 32 L400 40 Z" />
 </svg>`;
 
+/**
+ * The index shows static/thumbs/<slug>.webp (scripts/make-thumbs.sh), not the full cover,
+ * which can be 2.5 MB. A post without a thumb yet falls back to its cover.
+ */
+async function thumb(content: Content) {
+	const path = `thumbs/${content.slug}.webp`;
+	try {
+		await Deno.stat(`${CWD}/../static/${path}`);
+		return path;
+	} catch {
+		return content.img;
+	}
+}
+
 /** YYYY-MM-DD, from the frontmatter's dd/MM/yyyy. */
 function isoDate(date: Date) {
 	const pad = (n: number) => String(n).padStart(2, '0');
@@ -49,9 +63,9 @@ export async function getAll(): Promise<Response> {
 		const html = `
 <li>
 	<a class="card" href="${content.slug}">
-		<img src="${content.img}" alt="${
+		<span class="card-media"><img src="${await thumb(content)}" alt="${
 			htmlEscape(content.alt ?? '')
-		}" loading="lazy" />
+		}" loading="lazy" decoding="async" /></span>
 		${RIDGE}
 		<span class="card-text">
 			<time class="card-date mono" datetime="${isoDate(date)}">${

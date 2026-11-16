@@ -289,23 +289,50 @@ main.markdown-body[data-color-mode] {
 	transform: scale(0.99);
 }
 
-.markdown-body .card img {
+/*
+ * The image keeps its whole height: it is sized to the card's height and only a very wide
+ * one loses its sides. The fade into the card is a gradient painted over its left edge,
+ * not a mask, and the dimming is the same gradient, not a filter: iPhone Safari drops
+ * masked and filtered layers while scrolling, which showed as cards blinking out.
+ */
+.card-media {
 	position: absolute;
 	top: 0;
 	right: 0;
-	width: 72%;
 	height: 100%;
-	object-fit: cover;
-	border-radius: 0;
-	background: transparent;
-	filter: brightness(0.62) saturate(0.9);
-	-webkit-mask-image: linear-gradient(to right, transparent 0%, #000 55%);
-	mask-image: linear-gradient(to right, transparent 0%, #000 55%);
-	transform-origin: 70% 50%;
+	max-width: 72%;
+	/* The image and its fade zoom together, or the edge slides out from under the fade. */
+	transform-origin: 100% 50%;
 	transition: transform 500ms var(--ease-out);
 }
 
-.markdown-body a.card:hover img {
+.markdown-body .card-media img {
+	display: block;
+	height: 100%;
+	width: auto;
+	max-width: 100%;
+	object-fit: cover;
+	border-radius: 0;
+	background: transparent;
+}
+
+.card-media::after {
+	content: '';
+	position: absolute;
+	/* One pixel past the image's left edge, and solid for the first few percent: a scaled
+	   layer's edge renders on a subpixel and showed as a hairline. */
+	inset: 0 0 0 -1px;
+	background: linear-gradient(
+		to right,
+		var(--surface) 0%,
+		var(--surface) 4%,
+		rgb(28 27 36 / 0.7) 30%,
+		rgb(28 27 36 / 0.38) 60%,
+		rgb(28 27 36 / 0.3) 100%
+	);
+}
+
+.markdown-body a.card:hover .card-media {
 	transform: scale(1.04);
 }
 
@@ -348,7 +375,7 @@ main.markdown-body[data-color-mode] {
 	font-weight: 750;
 	line-height: 1.12;
 	letter-spacing: -0.02em;
-	text-shadow: 0 1px 2px rgb(0 0 0 / 0.8), 0 0 24px rgb(20 19 26 / 0.9);
+	text-shadow: 0 1px 3px rgb(0 0 0 / 0.85);
 }
 
 .card-desc {
@@ -530,6 +557,12 @@ main.markdown-body[data-color-mode] {
 	color: var(--text);
 	border-color: var(--accent-dim);
 	text-decoration: none;
+}
+
+@media (min-width: 700px) {
+	.markdown-body a.card {
+		min-height: 200px;
+	}
 }
 
 @media (max-width: 600px) {
