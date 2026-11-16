@@ -24,7 +24,8 @@ async function getContent(filename: string): Promise<Content> {
 	rows.forEach((x) => {
 		const [key, value] = x.split(':');
 		if (key && value) {
-			metadata[key] = value.trim();
+			// Some posts quote their values ('...'); the quotes are YAML, not text.
+			metadata[key] = value.trim().replace(/^(['"])(.*)\1$/, '$2');
 		}
 	});
 

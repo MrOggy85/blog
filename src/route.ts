@@ -1,26 +1,31 @@
 import { CWD } from './constants.ts';
-import { Feed, GitHub_Flavored_Markdown_CSS, parse } from './deps.ts';
+import {
+	Feed,
+	GitHub_Flavored_Markdown_CSS,
+	htmlEscape,
+	parse,
+} from './deps.ts';
 import getContent from './getContent.ts';
 import { render } from './gfm/render.ts';
 
 const MARKDOWN_CSS_PLACEHOLDER = '/* %CSS% */';
 const BODY_PLACEHOLDER = '%body%';
-const CSS_FILE_PLACEHOLDER = '%CSS_FILE%';
 
-async function getHtml(body: string, cssFile: string) {
+async function getHtml(body: string) {
 	const data = await Deno.readFile(`${CWD}/../index.html`);
 	const html = new TextDecoder('utf-8').decode(data);
 
 	return html
 		.replace(MARKDOWN_CSS_PLACEHOLDER, GitHub_Flavored_Markdown_CSS)
-		.replace(BODY_PLACEHOLDER, body)
-		.replace(CSS_FILE_PLACEHOLDER, cssFile);
+		.replace(BODY_PLACEHOLDER, body);
 }
 
-function getTitleHtml() {
-	return `
-<h1 style="font-size:4em;"><a href="">Oskar Okuno's Blog</a></h1>
-`;
+/** YYYY-MM-DD, from the frontmatter's dd/MM/yyyy. */
+function isoDate(date: Date) {
+	const pad = (n: number) => String(n).padStart(2, '0');
+	return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${
+		pad(date.getDate())
+	}`;
 }
 
 function htmlResponse(html: string) {
@@ -30,53 +35,63 @@ function htmlResponse(html: string) {
 }
 
 export async function getAll(): Promise<Response> {
-	const posts: { markdown: string; date: Date }[] = [];
+	const posts: { html: string; date: Date }[] = [];
 	for await (const dirEntry of Deno.readDir(`${CWD}/../markdown`)) {
 		const content = await getContent(dirEntry.name);
-		const markdown = `
-## [<img src="${content.img}" alt="${content.alt}" /> ${content.title}](${content.slug})
-
-### ${content.description}
-`;
-
 		const date = parse(content.date, 'dd/MM/yyyy');
+		const html = `
+<li>
+	<a class="card" href="${content.slug}">
+		<img src="${content.img}" alt="${
+			htmlEscape(content.alt ?? '')
+		}" loading="lazy" />
+		<span class="card-text">
+			<span class="card-title">${htmlEscape(content.title)}</span>
+			<span class="card-desc">${htmlEscape(content.description ?? '')}</span>
+			<time class="card-date mono" datetime="${isoDate(date)}">${
+			isoDate(date)
+		}</time>
+		</span>
+	</a>
+</li>`;
 
-		posts.push({ markdown, date });
+		posts.push({ html, date });
 	}
 
 	const ordered = posts.sort((a, b) => {
 		return b.date.getTime() - a.date.getTime();
 	});
 
-	const contentMarkdown = ordered.map((x) => x.markdown).join('');
+	const body = `
+<header class="masthead">
+	<h1><a href="">Oskar Okuno's Blog</a></h1>
+	<p class="dim">${ordered.length} posts</p>
+</header>
+<ul class="posts stagger">${ordered.map((x) => x.html).join('')}</ul>`;
 
-	const body = `${getTitleHtml()}` +
-		`${render(`${contentMarkdown}`, {})}`;
-
-	const html = await getHtml(`<div class="main">${body}</div>`, 'main.css');
+	const html = await getHtml(body);
 
 	return htmlResponse(html);
 }
 
 export async function getPost(title: string): Promise<Response> {
 	const content = await getContent(`${title}.md`);
-	const titleMarkdown = `
-  <header><a href="./">Oskar Okuno's Blog</a></header>
-  `;
-	const headerMarkdown = `
-# ${content.title}
-<p class="date">${content.date}</p>
+	const date = parse(content.date, 'dd/MM/yyyy');
+	const head = `
+<header class="post-head">
+	<a class="back" href="./">← Oskar Okuno's Blog</a>
+	<h1>${htmlEscape(content.title)}</h1>
+	<p class="lede">${htmlEscape(content.description ?? '')}</p>
+	<time class="faint mono" datetime="${isoDate(date)}">${isoDate(date)}</time>
+	<img class="hero" src="${content.img}" alt="${
+		htmlEscape(content.alt ?? '')
+	}"${content.width ? ` width="${content.width}"` : ''}${
+		content.height ? ` height="${content.height}"` : ''
+	} />
+</header>`;
 
-${content.description}
-
-![${content.alt}](${content.img})
-  `;
-
-	const body = render(
-		`${titleMarkdown} ${headerMarkdown} ${content.content}`,
-		{},
-	);
-	const html = await getHtml(`<div>${body}</div>`, 'post.css');
+	const body = `${head}<article>${render(content.content, {})}</article>`;
+	const html = await getHtml(body);
 
 	return htmlResponse(html);
 }

@@ -3,13 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#14131a">
   <title>Oskar Okuno Blog</title>
   <meta name="description"
     content="Oskar Okuno is a Fullstack Dev experienced with React, React Native, Vue. As a Fullstack Dev he also uses Node.js, Go, Java and C#.">
-  <link rel="stylesheet" href="reset.css">
-  <link rel="stylesheet" href="common.css">
-  <link rel="stylesheet" href="%CSS_FILE%">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="alternate" type="application/rss+xml" title="Oskar Okuno Blog" href="rss" />
   <link rel="alternate" type="application/atom+xml" title="Oskar Okuno Blog" href="atom" />
@@ -18,21 +16,42 @@
   <style>
     /* %CSS% */
   </style>
+  <!-- After the markdown CSS on purpose: blog.css re-points its variables. -->
+  <link rel="stylesheet" href="blog.css">
 </head>
 
 <body>
+  <div class="backdrop" aria-hidden="true">
+    <svg viewBox="0 0 800 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0.18" y2="1">
+          <stop offset="0" stop-color="#8b7bf5" stop-opacity="0" />
+          <stop offset="0.45" stop-color="#8b7bf5" stop-opacity="0.13" />
+          <stop offset="0.82" stop-color="#6a5bd0" stop-opacity="0.07" />
+          <stop offset="1" stop-color="#6a5bd0" stop-opacity="0" />
+        </linearGradient>
+        <path id="far" d="M0 110 L0 78 L46 62 L92 80 L133 54 L186 76 L233 48 L288 72 L332 58 L400 78 L400 110 Z" />
+        <path id="near" d="M0 110 L0 96 L58 82 L104 97 L152 74 L211 94 L262 72 L318 92 L360 80 L400 96 L400 110 Z" />
+      </defs>
+      <rect width="800" height="110" fill="url(#sky)" />
+      <g class="far"><use href="#far" /><use href="#far" x="400" /></g>
+      <g class="near"><use href="#near" /><use href="#near" x="400" /></g>
+    </svg>
+  </div>
+
   <main data-color-mode="dark" data-light-theme="light" data-dark-theme="dark" class="markdown-body">
     %body%
 
-    <p style="text-align: center;">
-      <a href="rss">RSS</a> |
-      <a href="atom">ATOM</a> |
-      <a href="json">JSON</a> |
-      <a rel="me" href="https://mastodon.social/@x001c1337z">Mastodon</a>
-    </p>
+    <footer class="site-foot">
+      <span class="faint">© Oskar Okuno</span>
+      <nav class="feeds">
+        <a href="rss">RSS</a>
+        <a href="atom">Atom</a>
+        <a href="json">JSON</a>
+        <a rel="me" href="https://mastodon.social/@x001c1337z">Mastodon</a>
+      </nav>
+    </footer>
   </main>
-
-  <footer>@ 2024 Oskar Okuno</footer>
 
   <script src="fathom.js"></script>
 </body>

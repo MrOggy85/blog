@@ -1,0 +1,512 @@
+/*
+ * The blog's whole look, in one file. Borrowed from Kotoba (言葉): a violet-tinted dark
+ * palette, one accent, flat surfaces with a hairline border, and the drifting ridge
+ * landscape behind the top of every page.
+ *
+ * Loaded AFTER the inline GitHub-markdown stylesheet, so the variables it defines can be
+ * re-pointed at these tokens instead of fighting its rules one by one.
+ */
+:root {
+	color-scheme: dark;
+
+	/* surfaces, darkest to lightest */
+	--bg: #14131a;
+	--surface: #1c1b24;
+	--surface-raised: #26242f;
+	--border: #33313d;
+
+	/* text */
+	--text: #edecf2;
+	--text-dim: #a5a2b3;
+	--text-faint: #6f6c7e;
+
+	/* one accent */
+	--accent: #8b7bf5;
+	--accent-dim: #6a5bd0;
+	--accent-soft: #b4a9fa;
+
+	/* Kotoba's outcome colours, reused for syntax highlighting */
+	--red: #f0637e;
+	--orange: #e0964a;
+	--green: #4db6a0;
+	--blue: #6aa9f0;
+
+	--font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+	--font-jp: -apple-system, BlinkMacSystemFont, 'Hiragino Sans',
+		'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif;
+	--font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+	--s1: 4px;
+	--s2: 8px;
+	--s3: 12px;
+	--s4: 16px;
+	--s5: 24px;
+	--s6: 32px;
+	--s7: 48px;
+
+	--radius: 14px;
+	--radius-sm: 10px;
+
+	--dur: 160ms;
+	--dur-enter: 300ms;
+	--ease: cubic-bezier(0.2, 0, 0.2, 1);
+	--ease-out: cubic-bezier(0.22, 0.9, 0.3, 1);
+	--stagger: 26ms;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--font);
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%;
+	overscroll-behavior-y: none;
+}
+
+/* --- the GitHub markdown stylesheet, re-pointed at the tokens --------------------------- */
+
+main.markdown-body[data-color-mode] {
+	--color-canvas-default: var(--bg);
+	--color-canvas-default-transparent: rgb(20 19 26 / 0);
+	--color-canvas-subtle: var(--surface);
+	--color-fg-default: var(--text);
+	--color-fg-muted: var(--text-dim);
+	--color-border-default: var(--border);
+	--color-border-muted: var(--border);
+	--color-neutral-muted: var(--surface-raised);
+	--color-accent-fg: var(--accent-soft);
+	--color-accent-emphasis: var(--accent);
+	--color-danger-fg: var(--red);
+
+	--color-prettylights-syntax-comment: var(--text-faint);
+	--color-prettylights-syntax-constant: var(--blue);
+	--color-prettylights-syntax-entity: var(--accent-soft);
+	--color-prettylights-syntax-storage-modifier-import: var(--text);
+	--color-prettylights-syntax-entity-tag: var(--green);
+	--color-prettylights-syntax-keyword: var(--red);
+	--color-prettylights-syntax-string: var(--green);
+	--color-prettylights-syntax-variable: var(--orange);
+	--color-prettylights-syntax-string-regexp: var(--green);
+	--color-prettylights-syntax-constant-other-reference-link: var(--blue);
+
+	position: relative;
+	z-index: 1;
+	max-width: 680px;
+	margin: 0 auto;
+	padding: var(--s7) var(--s4) var(--s7);
+	background: transparent;
+	color: var(--text);
+	font-family: var(--font);
+	font-size: 17px;
+	line-height: 1.7;
+	word-wrap: break-word;
+}
+
+/* --- the landscape ---------------------------------------------------------------------
+ * Kotoba's backdrop: two ridges drifting at different speeds, so a flat scene reads as
+ * distance. Fixed to the viewport. Only `transform` animates, so it composites. */
+
+.backdrop {
+	position: fixed;
+	inset: 0 0 auto;
+	height: 190px;
+	margin-top: -60px;
+	pointer-events: none;
+	z-index: 0;
+	overflow: hidden;
+}
+
+.backdrop svg {
+	display: block;
+	width: 200%;
+	height: 100%;
+}
+
+.backdrop .far,
+.backdrop .near {
+	will-change: transform;
+}
+
+.backdrop .far {
+	fill: var(--accent);
+	opacity: 0.07;
+	animation: drift 300s linear infinite;
+}
+
+.backdrop .near {
+	fill: var(--bg);
+	animation: drift 180s linear infinite;
+}
+
+@keyframes drift {
+	to {
+		transform: translateX(-400px);
+	}
+}
+
+/* --- arriving --------------------------------------------------------------------------- */
+
+@keyframes rise-in {
+	from {
+		opacity: 0;
+		transform: translateY(10px) scale(0.985);
+	}
+}
+
+.stagger > * {
+	animation: rise-in var(--dur-enter) var(--ease-out) backwards;
+}
+.stagger > *:nth-child(2) {
+	animation-delay: var(--stagger);
+}
+.stagger > *:nth-child(3) {
+	animation-delay: calc(var(--stagger) * 2);
+}
+.stagger > *:nth-child(4) {
+	animation-delay: calc(var(--stagger) * 3);
+}
+.stagger > *:nth-child(5) {
+	animation-delay: calc(var(--stagger) * 4);
+}
+.stagger > *:nth-child(6) {
+	animation-delay: calc(var(--stagger) * 5);
+}
+.stagger > *:nth-child(n + 7) {
+	animation-delay: calc(var(--stagger) * 6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation: none !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+/* --- shared text ------------------------------------------------------------------------ */
+
+.markdown-body a {
+	color: var(--accent-soft);
+	text-decoration: none;
+}
+
+.markdown-body a:hover {
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.dim {
+	color: var(--text-dim);
+}
+
+.faint {
+	color: var(--text-faint);
+	font-size: 0.8125rem;
+}
+
+.mono {
+	font-family: var(--font-mono);
+	font-variant-numeric: tabular-nums;
+}
+
+/* --- the index -------------------------------------------------------------------------- */
+
+.masthead {
+	margin-bottom: var(--s6);
+}
+
+.markdown-body .masthead h1 {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 2.25rem;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	line-height: 1.15;
+}
+
+.markdown-body .masthead h1 a {
+	color: var(--text);
+}
+
+.markdown-body .masthead h1 a:hover {
+	text-decoration: none;
+}
+
+.masthead p {
+	margin: var(--s2) 0 0;
+	font-size: 0.9375rem;
+}
+
+.markdown-body ul.posts {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--s3);
+}
+
+.markdown-body .posts li + li {
+	margin-top: 0;
+}
+
+.markdown-body a.card {
+	display: flex;
+	gap: var(--s4);
+	align-items: center;
+	padding: var(--s4);
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	color: var(--text);
+	transition: border-color var(--dur) var(--ease),
+		background var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.markdown-body a.card:hover {
+	text-decoration: none;
+	border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+	background: var(--surface-raised);
+}
+
+.markdown-body a.card:active {
+	transform: scale(0.99);
+}
+
+.markdown-body .card img {
+	flex: none;
+	width: 76px;
+	height: 76px;
+	object-fit: cover;
+	border-radius: var(--radius-sm);
+	background: var(--surface-raised);
+}
+
+.card-text {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.card-title {
+	font-size: 1.0625rem;
+	font-weight: 600;
+	line-height: 1.35;
+	letter-spacing: -0.005em;
+}
+
+.card-desc {
+	/* Some descriptions are a whole paragraph; the card shows the start of it. */
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	overflow: hidden;
+	color: var(--text-dim);
+	font-size: 0.875rem;
+	line-height: 1.45;
+}
+
+.card-date {
+	margin-top: var(--s1);
+	color: var(--text-faint);
+	font-size: 0.75rem;
+}
+
+/* --- a post ----------------------------------------------------------------------------- */
+
+.post-head {
+	margin-bottom: var(--s6);
+}
+
+.markdown-body a.back {
+	display: inline-block;
+	margin-bottom: var(--s5);
+	color: var(--text-dim);
+	font-size: 0.875rem;
+}
+
+.markdown-body .post-head h1 {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 2.1rem;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	line-height: 1.2;
+}
+
+.post-head .lede {
+	margin: var(--s3) 0 var(--s2);
+	color: var(--text-dim);
+	font-size: 1.125rem;
+	line-height: 1.5;
+}
+
+.markdown-body .hero {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin-top: var(--s5);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	background: var(--surface);
+}
+
+.markdown-body img {
+	max-width: 100%;
+	height: auto;
+	border-radius: var(--radius-sm);
+	background: transparent;
+}
+
+.markdown-body h1,
+.markdown-body h2 {
+	border-bottom: 0;
+	font-weight: 650;
+	letter-spacing: -0.01em;
+}
+
+.markdown-body h2 {
+	margin-top: var(--s7);
+	font-size: 1.5rem;
+}
+
+.markdown-body h3 {
+	margin-top: var(--s6);
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+.markdown-body p,
+.markdown-body li {
+	color: var(--text);
+}
+
+.markdown-body strong {
+	font-weight: 650;
+}
+
+.markdown-body hr {
+	height: 1px;
+	background: var(--border);
+	border: 0;
+	margin: var(--s6) 0;
+}
+
+.markdown-body blockquote {
+	margin-left: 0;
+	padding: var(--s1) var(--s4);
+	border-left: 3px solid var(--accent);
+	color: var(--text-dim);
+	background: var(--surface);
+	border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.markdown-body code,
+.markdown-body tt {
+	font-family: var(--font-mono);
+	font-size: 0.85em;
+	padding: 0.15em 0.4em;
+	background: var(--surface-raised);
+	border-radius: 6px;
+}
+
+.markdown-body pre,
+.markdown-body .highlight pre {
+	font-family: var(--font-mono);
+	font-size: 0.8125rem;
+	line-height: 1.6;
+	padding: var(--s4);
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-sm);
+}
+
+.markdown-body pre code {
+	padding: 0;
+	background: transparent;
+	font-size: inherit;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+	border-color: var(--border);
+}
+
+.markdown-body table tr {
+	background: transparent;
+	border-color: var(--border);
+}
+
+.markdown-body table tr:nth-child(2n) {
+	background: var(--surface);
+}
+
+.markdown-body :lang(ja) {
+	font-family: var(--font-jp);
+}
+
+/* --- footer ----------------------------------------------------------------------------- */
+
+.site-foot {
+	margin-top: var(--s7);
+	padding-top: var(--s5);
+	border-top: 1px solid var(--border);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--s2) var(--s4);
+	align-items: center;
+	justify-content: space-between;
+	font-size: 0.875rem;
+}
+
+.feeds {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--s2);
+}
+
+.markdown-body .feeds a {
+	padding: var(--s1) var(--s3);
+	border: 1px solid var(--border);
+	border-radius: 999px;
+	color: var(--text-dim);
+	font-size: 0.8125rem;
+}
+
+.markdown-body .feeds a:hover {
+	color: var(--text);
+	border-color: var(--accent-dim);
+	text-decoration: none;
+}
+
+@media (max-width: 600px) {
+	main.markdown-body[data-color-mode] {
+		padding-top: var(--s6);
+		font-size: 16px;
+	}
+
+	.markdown-body .masthead h1 {
+		font-size: 1.9rem;
+	}
+
+	.markdown-body .post-head h1 {
+		font-size: 1.75rem;
+	}
+
+	.markdown-body .card img {
+		width: 64px;
+		height: 64px;
+	}
+}
