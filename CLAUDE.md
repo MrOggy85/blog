@@ -7,7 +7,9 @@ rendered to HTML. No web framework.
 
 - `markdown/<slug>.md` — one file per post. The **filename is the slug** (the
   `slug:` frontmatter field is ignored, see `src/getContent.ts`).
-- `static/` — assets (`img/`, `gifs/`, css). Served from the URL root.
+- `static/` — assets (`img/`, `gifs/`, `thumbs/`, `blog.css`). Served from the URL root.
+  The whole look is `static/blog.css` (Kotoba's palette); it re-points the inline
+  GitHub-markdown CSS variables rather than overriding its rules.
 - `src/` — server. `main.ts` (`Deno.serve`) → `server.ts` (static + router) →
   `route.ts` (handlers return `Response`) → `getContent.ts`.
 
@@ -25,6 +27,18 @@ width: 1280
 height: 720
 ---
 ```
+
+## Cover images (Oskar, 2026-11-16)
+
+**Landscape 16:9** — e.g. 1280×720. The model covers are
+`evolution-of-frontend-devs` (880×495) and `private-npm-registry-with-verdaccio-2-2`
+(500×274): those proportions suit both the index card and the post page. Older
+posts with square or portrait covers stay as they are. Keep it a JPEG or WebP
+under ~300 KB; a 2.5 MB PNG is what made the index slow.
+
+After adding or changing a cover, run `scripts/make-thumbs.sh` (ImageMagick;
+`CONVERT="tk convert"` on odin) and commit `static/thumbs/<slug>.webp` — the index
+shows the thumb, falling back to the full cover if there is none.
 
 ## Commands (see `Makefile`)
 
