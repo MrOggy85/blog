@@ -20,6 +20,13 @@ async function getHtml(body: string) {
 		.replace(BODY_PLACEHOLDER, body);
 }
 
+/** Kotoba's two ridges, squashed to a strip along the bottom of each card. */
+const RIDGE =
+	`<svg class="card-ridge" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true">
+<path class="far" d="M0 40 L0 22 L46 12 L92 24 L133 6 L186 20 L233 2 L288 18 L332 9 L400 22 L400 40 Z" />
+<path class="near" d="M0 40 L0 32 L58 24 L104 33 L152 18 L211 30 L262 16 L318 28 L360 21 L400 32 L400 40 Z" />
+</svg>`;
+
 /** YYYY-MM-DD, from the frontmatter's dd/MM/yyyy. */
 function isoDate(date: Date) {
 	const pad = (n: number) => String(n).padStart(2, '0');
@@ -45,12 +52,13 @@ export async function getAll(): Promise<Response> {
 		<img src="${content.img}" alt="${
 			htmlEscape(content.alt ?? '')
 		}" loading="lazy" />
+		${RIDGE}
 		<span class="card-text">
-			<span class="card-title">${htmlEscape(content.title)}</span>
-			<span class="card-desc">${htmlEscape(content.description ?? '')}</span>
 			<time class="card-date mono" datetime="${isoDate(date)}">${
 			isoDate(date)
 		}</time>
+			<span class="card-title">${htmlEscape(content.title)}</span>
+			<span class="card-desc">${htmlEscape(content.description ?? '')}</span>
 		</span>
 	</a>
 </li>`;
