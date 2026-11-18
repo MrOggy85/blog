@@ -50,4 +50,8 @@ shows the thumb, falling back to the full cover if there is none.
 
 - File reads anchor to the `src/` dir via `import.meta.dirname` (`src/constants.ts`),
   not `Deno.cwd()` — don't reintroduce cwd-relative paths.
-- Deploy: see `docs/deno-deploy.md` (needs `PORT=8000`).
+- Deploy: **Cloudflare Workers, static assets** (since 2026-11-18). `cloudflare/wr build`
+  renders everything into `dist/` with `scripts/prerender.ts`, which calls the handlers in
+  `src/route.ts` — so `make run` and the deployed site come from the same code. Then
+  `cloudflare/wr deploy`. A new route in `server.ts` must be added to the prerender too, or
+  it exists only locally. `docs/deno-deploy.md` is the old Deno Deploy setup.
