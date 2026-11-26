@@ -3,6 +3,10 @@ title: An Audience of One
 description: I finally use the app I built myself. Here's what that costs.
 slug: audience-of-one
 date: 26/11/2026
+img: img/audience-of-one.webp
+alt: 'An empty theater with a flashcard on the screen and a single viewer in a spotlight'
+width: 1280
+height: 720
 ---
 
 tl;dr: **AI tools made software with one user practical, and I love it. But if everyone builds their own, a shared project has to aim ten times higher to be worth sharing.**
