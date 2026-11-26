@@ -511,5 +511,11 @@
     "https://esm.sh/prismjs@1.29.0/denonext/prismjs.mjs": "22ae3128203d6ca4793dae7e1728b8d7db21b54e373e9538cae7a61cce159630",
     "https://esm.sh/sanitize-html@2.8.1/esnext/sanitize-html.mjs": "a17c2e34bf9b5fdbd2d3c1e0523799ad970ebc2604c65b63172151ea438c619c",
     "https://esm.sh/sanitize-html@2.8.1?target=esnext": "c836fe340c774ca6848fc2d32059d8cfa671cd3b07986549cb7ba9271f94ea06"
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:he@1.2.0",
+      "npm:marked@4.0.12"
+    ]
   }
 }
