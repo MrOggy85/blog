@@ -13,6 +13,9 @@
   // (AAAA 100::) is made by hand. workers.dev is on for the branch Previews (2026-11-27).
   "workers_dev": true,
   "preview_urls": true,
+  // Required by `wrangler preview` (branch builds), even empty: Previews inherit nothing
+  // from production, and a static-files Worker needs nothing extra.
+  "previews": {},
   "routes": [{ "pattern": "blog.okuno.se/*", "zone_name": "okuno.se" }],
 
   // Static files only, no Worker code: dist/ is the whole blog, rendered by
