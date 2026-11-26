@@ -1,22 +1,54 @@
 ---
 title: An Audience of One
-description: DRAFT - vibe coding the apps I actually use
+description: I finally use the app I built myself. Here's what that costs.
 slug: audience-of-one
 date: 26/11/2026
 ---
 
-It started like so many developers who is learning a language; I built my own SRS app. I’ve done that several times before. It’s part procrastination and part real frustration over the UX and part being a cheapskate. 
-However this time I actually find myself using the app as a user. Maybe because I feel like a user more than a author. Previous apps I attempted were hand crafted, many evenings of banging my head and typing repetitive code. Not studying at all. But now, with my vibe coded app, I’m actually dig feeding the app, giving my feedback of the UX that is not working for me and asking for new type of challenges that may or may not suit my needs. 
+tl;dr: **AI tools made software with one user practical, and I love it. But if everyone builds their own, a shared project has to aim ten times higher to be worth sharing.**
 
-### Bring a cheapskate 
-When I pay for software I become a customer. I have now a commercial relationship with the author. When I have a new feature or a change in mind I need to bring that to the attention of the author and motivate him to do the change. This part is kind of true for community built software too. And then I need to wait for the author to actually write the change and release it and hope it’s what I meant if it ever even gets picked up. For open source I can at least do the change myself. With ai tools it’s easier than ever. After some discussion i can get a version of my change request merged and released. However that is the same for anyone else too so now this open source project’s UX may go in a direction I don’t like.
+# Another SRS app
 
-### one user app
-When I use AI tools for my own purposes it’s cutting out a lot of steps. I can go from idea to reality in a couple of minutes. The longest part is typing the idea rather than the implementation. No change requests, no PRs, just the next feature, shipped. 
-It’s addictive 
+It started like it does for so many developers learning a language: I built my own SRS app. I've done that several times before. It's part procrastination, part real frustration with the UX, and part being a cheapskate.
 
-### replacing more apps
-Building my own language learning app was part about replacing Anki. But also upgrading and adapting the UX to suit my needs. The next app I did was a reminders app, classic. Something I’ve done many times before. But this time was also different. Armed with my recent experience I was able to quickly, within a week, replace my usage of Apple Reminders. And I’m writing notes for this blog post on my vibe coded Obsidian replacement. 
+This time is different. This time I actually use it.
 
-### Freedom isn’t free
-A bit motivation for me to write my own software is independence. I get to choose my own adventure. With AI tools it’s actually become practical. Previously I would have only had time working on the app and no time to experience it. But, some sense of community is lost. I rip off features I like and there is no incentives for me to contribute back since I don’t use the the apps, the libraries directly anymore. But I also feel like a lot of projects were written when we didn’t have the convenience and power of ai tools. It makes sense to empower each other by spending time making these reusable tools and frameworks. It still makes sense, but the level has drastically changed. The ambition level for the project needs to be 10x higher than before. Otherwise you're just building a POC that people can copy paste and make their own
+My earlier attempts were handcrafted. Many evenings of banging my head against the wall and typing repetitive code. Not studying at all. By the time the app worked, I was tired of it.
+
+Now I vibe code it, and I feel more like a user than an author. I study, I notice what doesn't work for me, and I say so. I'm dogfooding the app instead of building it.
+
+It wasn't instant. For a while I fell into the old trap and built instead of studied. I had to put myself on a build freeze: a week of no new features, only reviews. It worked, and it taught me something about the next part.
+
+# Feedback, not code
+
+What I give the app now is feedback. This screen is in the way. That answer should have counted. Reviews got dull, so I asked for new kinds of challenges: a listen mode, a small shooter for vocabulary, an adventure game with a story in Japanese. Some of them suit me, some don't. Trying one costs me an evening, not a month.
+
+# An app with one user
+
+When I build for myself, a lot of steps disappear. I go from idea to reality in a couple of minutes. The longest part is typing the idea, not the implementation. No change requests, no PRs, no roadmap. Just the next feature, shipped.
+
+It's addictive. That's why I needed the build freeze.
+
+# Replacing more apps
+
+The SRS app was partly about replacing Anki, and partly about bending the UX to my needs. The next one was a reminders app. A classic, I've built a few before. But this time, armed with what I'd learned, I replaced my use of Apple Reminders within a week.
+
+And I'm writing this post in my own Obsidian replacement.
+
+# Being a customer
+
+When I pay for software, I become a customer. I have a commercial relationship with the author. When I want a feature or a change, I have to bring it to their attention and convince them it's worth doing. Then I wait for them to build and release it, and hope it's what I meant. If it ever gets picked up at all.
+
+Community-built software is much the same. With open source I can at least make the change myself, and with AI tools that's easier than ever. After some discussion, my change gets merged and released. But that's just as easy for everyone else, so the project can drift in a direction I don't like.
+
+With my own apps, the only roadmap is mine.
+
+# Freedom isn't free
+
+A big motivation for writing my own software is independence. I get to choose my own adventure. AI tools made that practical: before, I'd have had time to build the app and no time to use it.
+
+But some sense of community is lost. I take the features I like from other apps and leave the apps behind. I've started doing the same with libraries: small dependencies get replaced by packages of my own. I don't use the originals anymore, so I have no reason to contribute back.
+
+A lot of the projects I rely on were written before we had the convenience and power of AI tools. Back then it made sense to spend time on reusable tools and frameworks, because it saved everyone else that time. It still makes sense. But the bar has moved.
+
+The ambition for a shared project needs to be ten times higher than before. Otherwise you're publishing a proof of concept that people copy, paste and make their own.
