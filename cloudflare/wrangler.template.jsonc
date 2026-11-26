@@ -19,5 +19,15 @@
     "directory": "../dist",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "none"
+  },
+
+  // Workers Logs, turned on in the dashboard 2026-11-27. Kept here too, or the next
+  // deploy would switch it off again.
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+      "persist": true
+    }
   }
 }
