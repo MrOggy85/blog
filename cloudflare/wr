@@ -3,8 +3,9 @@
 #   ./wr build                  render the blog into dist/ (scripts/prerender.ts)
 #   ./wr deploy                 deploy dist/ (run build first)
 #   ./wr <wrangler args...>     anything else, e.g. ./wr whoami
-# wrangler.jsonc is rendered from wrangler.template.jsonc and .env on every run; the API
-# token comes from TOKEN_FILE and reaches the container only as an environment variable.
+# Cloudflare also builds and deploys from GitHub on its own (wrangler.jsonc says how); this
+# is the same thing by hand. The API token comes from TOKEN_FILE in .env and reaches the
+# container only as an environment variable.
 set -euo pipefail
 export DOCKER_CONTEXT=rootless
 HERE=$(cd "$(dirname "$0")" && pwd)
@@ -15,9 +16,6 @@ docker image inspect "$IMAGE" >/dev/null 2>&1 || docker build -t "$IMAGE" "$HERE
 
 [[ -f "$HERE/.env" ]] || { echo "no cloudflare/.env - copy .env.example" >&2; exit 1; }
 . "$HERE/.env"
-sed -e "s|__CF_ACCOUNT_ID__|$CF_ACCOUNT_ID|" -e "s|__HOSTNAME__|$HOSTNAME|" \
-    -e "s|__ZONE__|$ZONE_NAME|" -e "s|__WORKERS_DEV__|${WORKERS_DEV:-false}|" \
-    "$HERE/wrangler.template.jsonc" > "$HERE/wrangler.jsonc"
 
 if [[ "${1:-}" == build ]]; then
   exec docker run --rm --cap-drop ALL --security-opt no-new-privileges \

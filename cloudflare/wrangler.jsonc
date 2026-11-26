@@ -1,0 +1,35 @@
+// The Cloudflare config for blog.okuno.se. Committed: nothing in it is secret (the account
+// id is a public identifier). Cloudflare builds from GitHub with this folder as the root
+// directory: `npm run build` renders dist/, then a push to master deploys and any other
+// branch gets a public Preview. `./wr build` + `./wr deploy` from odin do the same by hand.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "blog",
+  "compatibility_date": "2026-11-01",
+  "account_id": "60d2c3b4a581b73ff72325129ba8c3b9",
+
+  // A Route on the zone, not a Custom Domain: a Custom Domain gets its own certificate,
+  // which publishes the hostname in Certificate Transparency. The proxied record
+  // (AAAA 100::) is made by hand. workers.dev is on for the branch Previews (2026-11-27).
+  "workers_dev": true,
+  "preview_urls": true,
+  "routes": [{ "pattern": "blog.okuno.se/*", "zone_name": "okuno.se" }],
+
+  // Static files only, no Worker code: dist/ is the whole blog, rendered by
+  // scripts/prerender.ts (npm run build). /<slug> is served from <slug>.html.
+  "assets": {
+    "directory": "../dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  },
+
+  // Workers Logs, turned on in the dashboard 2026-11-27. Kept here too, or the next
+  // deploy would switch it off again.
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+      "persist": true
+    }
+  }
+}
