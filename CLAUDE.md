@@ -56,8 +56,14 @@ shows the thumb, falling back to the full cover if there is none.
   to the prerender too, or it exists only locally.
 - **A push to master publishes** (since 2026-11-27): Cloudflare builds from GitHub with
   root directory `cloudflare/`, build command `npm run build` (Deno comes from npm there),
-  then `npx wrangler deploy`. **Any other branch pushed gets a public Preview**, linked
-  in the Worker's Previews section. So a draft post goes on a branch, never on master.
+  then `npx wrangler deploy`. **Any other branch pushed gets a public Preview** at
+  `https://<branch, / as ->-blog.<subdomain>.workers.dev`. So a draft post goes on a
+  branch, never on master. Previews have their **own settings** (Settings → Builds →
+  "Previews Base"): root `/`, no build command, preview command
+  `cd cloudflare && npm ci && npm run build && npx wrangler preview`; the root-directory
+  field there did not take effect. `wrangler preview` needs the `previews: {}` block.
+  The odin token cannot read build logs (the Builds API wants a user-owned token), so a
+  failed build means asking Oskar for the log.
   `cloudflare/wrangler.jsonc` is committed (nothing in it is secret). By hand from odin:
   `cloudflare/wr build`, then `cloudflare/wr deploy`. `docs/deno-deploy.md` is the old
   Deno Deploy setup.
